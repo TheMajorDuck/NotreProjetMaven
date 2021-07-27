@@ -117,7 +117,7 @@ public abstract class Batiment {
 
 	}
 	
-	@Override
+	
 	public String toString() {		
 		return String.format("Nom: "+ this.nom + "  Niveau: " + this.level+ "  Defense: " +this.def + "  Attaque: " +this.att);
 	}

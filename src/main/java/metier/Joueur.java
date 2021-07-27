@@ -269,7 +269,7 @@ public class Joueur extends Compte{
 		System.out.printf("%s\n","3- Attaquer");
 		System.out.printf("%s\n","4- Fin de tour");
 		
-		System.out.println(this.getStock());
+		afficheListeRessources();
 		
 		int choix = saisieInt("Choisir un menu");
 		
@@ -367,7 +367,7 @@ public class Joueur extends Compte{
 			Batiment batiment = stringToBatiment(choix);	
 			if (batiment instanceof Batiment){
 				construction(batiment);
-				System.out.println("Un batiment " + batiment.getNom() + " a ete construit");
+				System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
 			}
@@ -446,18 +446,28 @@ public class Joueur extends Compte{
 		
 	}
 	
+	public void afficheListeRessources() {
+		System.out.println("Ressources disponibles:");
+		for (Ressource r: this.stock) {
+			System.out.print(r.toStringName() + ": "+r.getStock() + "  ");
+		}
+		
+		System.out.println("");
+	}
+	
 	public void displayConstructionPossibilites(){
 		
 		System.out.printf("%s","Liste des possibilite de construction" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n","Nom", "level", "def", "att");
+		//System.out.printf("%25s %5s %5s %5s\n","Nom", "level", "def", "att");
 		
-		System.out.println(this.getStock());
+		afficheListeRessources();
 		
 		for (ListeBatiment b : ListeBatiment.values()) { 
     		Batiment batiment = stringToBatiment(b.toString());
-    		System.out.println(batiment.getNom());
-    		System.out.println(batiment.getCost());
+    		//System.out.println(batiment.toStringName());
+    		//System.out.println(batiment.toStringWithCost());
     		if(verification(batiment)){
+    			System.out.println(batiment.toStringName());
 				System.out.println(batiment.toStringWithCost());
 			}
 		}
