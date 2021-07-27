@@ -186,7 +186,7 @@ public class Joueur extends Compte{
 		}
 	}
 	
-	public void construction (Batiment bat)  // Construction d'un batiment (ajout ï¿½ la liste/actuAtt/ActuDef/ActuRessources)
+	public void constructBat(Batiment bat)  // Construction d'un batiment (ajout ï¿½ la liste/actuAtt/ActuDef/ActuRessources)
 	{
 		this.construction.add(bat);
 		this.construction = actuDef();
@@ -361,13 +361,24 @@ public class Joueur extends Compte{
 		
 		System.out.printf("%s\n","0- Menu precedent");
 		String choix = saisieString("Choisir un batiment a construire");
+		
 		if(choix.equals("0")){
 			menuJoueur(p);
+			System.out.println(choix);
 		} else {
+			System.out.println(choix);
 			Batiment batiment = stringToBatiment(choix);	
+			System.out.println(batiment.toStringName());
 			if (batiment instanceof Batiment){
-				construction(batiment);
-				System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
+				
+				System.out.println(batiment.toStringName());
+				if (verification(batiment)) {
+					
+					System.out.println(batiment.toStringName());
+					constructBat(batiment);
+					System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
+				}
+				
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
 			}
@@ -390,6 +401,7 @@ public class Joueur extends Compte{
 				case "Mine" : batiment = new Mine();break;
 				case "Muraille" : batiment = new Muraille();break;
 				case "Scierie" : batiment = new Scierie();break;
+				default: System.out.println("Ceci n'est pas un batiment");break;
 			}
 			
 		
@@ -438,7 +450,7 @@ public class Joueur extends Compte{
 		System.out.printf("%s","Liste de vos batiments" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 		
-		for(Batiment batiment : construction){
+		for(Batiment batiment : this.construction){
 			System.out.println(batiment);
 		}
 		
@@ -466,6 +478,7 @@ public class Joueur extends Compte{
     		Batiment batiment = stringToBatiment(b.toString());
     		//System.out.println(batiment.toStringName());
     		//System.out.println(batiment.toStringWithCost());
+
     		if(verification(batiment)){
     			System.out.println(batiment.toStringName());
 				System.out.println(batiment.toStringWithCost());
@@ -478,7 +491,7 @@ public class Joueur extends Compte{
 	
 	public void displayConstructionNoPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilite de construction - impossible de  construire" + "\n");
+		System.out.printf("%s","Liste des possibilite de construction - impossible deï¿½ construire" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 				
 		for (ListeBatiment b : ListeBatiment.values()) { 
@@ -598,7 +611,7 @@ public class Joueur extends Compte{
 		System.out.printf("%s","FIN DE TOUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
 		System.out.printf("%s","Vous avez effectue votre action de jeu, au prochain joueur de jouer !");
 		
-		// TO DO : Mettre le boolean des batiments d'attaque à false
+		// TO DO : Mettre le boolean des batiments d'attaque ï¿½ false
 		for(Batiment batiment : this.construction){
 			if(batiment instanceof Attaque)
 			{
