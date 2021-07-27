@@ -359,7 +359,7 @@ public class Joueur extends Compte{
 			int i = stock.get(0).getStock();
 			if (i<=0) 
 			{
-				System.out.println("Le four ne peut pas être utiliser! Vous n'avez pas de bois!");
+				System.out.println("Le four ne peut pas ï¿½tre utiliser! Vous n'avez pas de bois!");
 			}
 			else 
 			{
@@ -712,13 +712,8 @@ public class Joueur extends Compte{
 	
 	public void menuAttaquer(Partie p)
 	{
-<<<<<<< HEAD
 		//Vï¿½rifie si un batiment d'attaque disponible pour attaquer existe
-=======
-		//Vérifie si un batiment d'attaque disponible pour attaquer existe
-		
-		
->>>>>>> cd892d2b4472e0d19740d3c1dc32fbf244d4fb9b
+
 		if(this.getBatimentAttaque())
 		{
 			
