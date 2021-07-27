@@ -302,9 +302,11 @@ public class Joueur extends Compte{
 			Batiment batiment = stringToBatiment(choix);	
 			if (batiment instanceof Batiment){
 				//construction(batiment); // TODO: call update
+
 				System.out.println("Un batiment " + batiment.getNom() + " a ete ameliorer");
 				batiment.upgrade(batiment);
 				System.out.println("Un batiment " + batiment.toStringName() + " a ete ameliorer");
+
 				System.out.println(batiment);
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
