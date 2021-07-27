@@ -15,7 +15,7 @@ public class Partie {
 	static DAOCompte daoCompte = new DAOCompte();
 
 	private int id;
-	private int nbrDeTour;
+	private int nbrDeTour=100;
 	private boolean partieEnCours;
 	private List<Joueur> joueurs= new ArrayList<Joueur>();
 	
