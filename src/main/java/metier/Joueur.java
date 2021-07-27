@@ -229,9 +229,6 @@ public class Joueur extends Compte{
 	
 	
 	public void joueTour(Partie p){
-		
-		// TODO: piocher ressseConnecter(login, password)ource
-		piocherRessources();
      
 		// TODO: choix de jeu menuJoueur (1- construire 2-attaquer 3-fin de tour)
 		menuJoueur(p);
