@@ -265,7 +265,7 @@ public class Joueur extends Compte{
 		
 		System.out.printf("%s\n","MENU JOUEUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
 		System.out.printf("%s\n","1- Construire");
-		System.out.printf("%s\n","2- Am�liorer");
+		System.out.printf("%s\n","2- Ameliorer");
 		System.out.printf("%s\n","3- Attaquer");
 		System.out.printf("%s\n","4- Fin de tour");
 		
@@ -280,7 +280,7 @@ public class Joueur extends Compte{
 			case 1 : menuConstruction(p); break;
 			case 2 : menuAmeliorer(p); break; // TODO: a finir en int�grant la m�thode pour upgrader le batiment
 			case 3 : menuAttaquer(p);break; // TODO: Menu attaque
-			case 4 : this.setTourEnCours(false);break; // TODO: fin de tour
+			case 4 : menuFinDeTour(p);break; // TODO: fin de tour
 			default : System.out.println("Mauvaise valeur");
 		}
 		
@@ -294,25 +294,25 @@ public class Joueur extends Compte{
 		displayOwnedConstWithUpdatePossibilities();
 		displayOwnedConstWithUpdateNoPossibilities();
 		
-		System.out.printf("%s\n","0- Menu pr�c�dent");
-		String choix = saisieString("Choisir un b�timent � am�liorer");
+		System.out.printf("%s\n","0- Menu precedent");
+		String choix = saisieString("Choisir un batiment a ameliorer");
 		if(choix.equals("0")){
 			menuJoueur(p);
 		} else {
 			Batiment batiment = stringToBatiment(choix);	
 			if (batiment instanceof Batiment){
 				//construction(batiment); // TODO: call update
-				System.out.println("Un b�timent " + batiment.getNom() + " a �t� am�liorer");
+
+				System.out.println("Un batiment " + batiment.getNom() + " a ete ameliorer");
 				batiment.upgrade(batiment);
-				System.out.println("Un b�timent " + batiment.toStringName() + " a �t� am�liorer");
+				System.out.println("Un batiment " + batiment.toStringName() + " a ete ameliorer");
+
 				System.out.println(batiment);
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
 			}
 		}
 
-		menuAmeliorer(p);
-		
 	}
 	
 	
@@ -359,9 +359,9 @@ public class Joueur extends Compte{
 		displayConstructionPossibilites();
 		displayConstructionNoPossibilites();
 		
-		System.out.printf("%s\n","0- Menu pr�c�dent");
-		String choix = saisieString("Choisir un b�timent � construire");
-		System.out.println(choix);
+		System.out.printf("%s\n","0- Menu precedent");
+		String choix = saisieString("Choisir un batiment a construire");
+		
 		if(choix.equals("0")){
 			menuJoueur(p);
 			System.out.println(choix);
@@ -376,7 +376,7 @@ public class Joueur extends Compte{
 					
 					System.out.println(batiment.toStringName());
 					constructBat(batiment);
-					System.out.println("Un b�timent " + batiment.toStringName() + " a �t� construit");
+					System.out.println("Un batiment " + batiment.getNom() + " a ete construit");
 				}
 				
 			} else {
@@ -384,7 +384,6 @@ public class Joueur extends Compte{
 			}
 		}
 
-		menuConstruction(p);
 		
 	}
 	
@@ -461,7 +460,7 @@ public class Joueur extends Compte{
 	
 	public void displayConstructionPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilité de construction" + "\n");
+		System.out.printf("%s","Liste des possibilite de construction" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n","Nom", "level", "def", "att");
 		
 		System.out.println(this.getStock());
@@ -479,7 +478,7 @@ public class Joueur extends Compte{
 	
 	public void displayConstructionNoPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilité de construction - impossible à construire" + "\n");
+		System.out.printf("%s","Liste des possibilite de construction - impossible de� construire" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 				
 		for (ListeBatiment b : ListeBatiment.values()) { 
@@ -511,7 +510,7 @@ public class Joueur extends Compte{
 			}
 		
 			System.out.printf("%s","MENU ATTAQUER" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
-			System.out.printf("%s","0- Menu pr�c�dent");
+			System.out.printf("%s","0- Menu precedent");
 			System.out.printf("%s","1- Attaquer!!!!!" + "\n");
 			int choix = saisieInt("Choisir une option");
 		
@@ -525,7 +524,7 @@ public class Joueur extends Compte{
 		}
 		else
 		{
-			System.out.println("Vous n'avez pas de b�timent d'attaque, quel dommage...'");
+			System.out.println("Vous n'avez pas de batiment d'attaque, quel dommage...'");
 			menuJoueur(p);
 		}
 	}
@@ -537,7 +536,7 @@ public class Joueur extends Compte{
 		Joueur ennemi = p.getJoueurs().get(joueur-1);
 				
 		System.out.printf("%s\n","MENU ATTAQUER" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
-		System.out.printf("%s\n","0- Menu pr�c�dent");
+		System.out.printf("%s\n","0- Menu precedent");
 		System.out.printf("%s\n","1- Attaquer un  batiment?");
 		System.out.printf("%s\n","2- Attaquer tous les  batiments?");
 		int choix = saisieInt("Choisir une option");
@@ -553,7 +552,7 @@ public class Joueur extends Compte{
 	
 	public void menuAttaqueChoixBatiment(Joueur j, Partie p)
 	{
-		// Affiche liste des batiments du joueur attaqu�
+		// Affiche liste des batiments du joueur attaque
 		j.displayOwnedConstruction();
 		String nomBat = saisieString("Quel batiment voulez vous attaquer(nom)?");
 		int numBat = saisieInt("Le combienti�me de "+ nomBat +"voulez vous attaquer?");
@@ -576,16 +575,15 @@ public class Joueur extends Compte{
 		
 		if(batOk = false)
 		{
-			System.out.println("Le joueur attaqu� ne poss�de pas ce batiment!'");
+			System.out.println("Le joueur attaque ne possede pas ce batiment!'");
 			menuAttaqueChoixBatiment(j,p);
 		}
 		if (i!=numBat)
 		{
-			System.out.println("Le num�ro de batiment n'existe pas!'");
+			System.out.println("Le numero de batiment n'existe pas!'");
 			menuAttaqueChoixBatiment(j,p);
 		}
-		 
-		menuAttaqueJoueur(p);
+
 	}
 	
 	public void menuAttaqueJoueur(Joueur j)
@@ -596,10 +594,17 @@ public class Joueur extends Compte{
 		
 	public void menuFinDeTour(Partie p)
 	{
+		this.setTourEnCours(false);
 		System.out.printf("%s","FIN DE TOUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
-		System.out.printf("%s","Vous avez effectu� votre action de jeu, au prochain joueur de jouer !");
+		System.out.printf("%s","Vous avez effectue votre action de jeu, au prochain joueur de jouer !");
 		
-		// TO DO : Afficher le r�capitulatif de l'action r�alis�e par le joueur
+		// TO DO : Mettre le boolean des batiments d'attaque � false
+		for(Batiment batiment : this.construction){
+			if(batiment instanceof Attaque)
+			{
+				((Attaque) batiment).setUsed(false);
+			}
+		}
 	}	
 	
 }
