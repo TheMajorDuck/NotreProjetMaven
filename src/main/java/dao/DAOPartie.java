@@ -39,6 +39,31 @@ public class DAOPartie implements IDAO<Partie,Integer>{
 		}
 		return p;
 	}
+	
+	public Partie findIdBySurnomJoueur(String surnom) {
+		Partie p=null;
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
+			PreparedStatement ps = conn.prepareStatement("SELECT id FROM partie JOIN joueur ON partie.id = joueur.id_partie JOIN compte ON compte.id=joueur.id_compte WHERE compte.surnom=?");
+			ps.setString(1, surnom);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) 
+			{
+				p = new Partie(rs.getInt("id"),rs.getInt("nbr_de_tour")); // A CHANGER
+			}
+
+			rs.close();
+			ps.close();
+			conn.close();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 
 	@Override
 	public List<Partie> findAll() {

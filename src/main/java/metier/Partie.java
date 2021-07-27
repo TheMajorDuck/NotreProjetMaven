@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +16,9 @@ import dao.*;
 public class Partie {
 
 	static DAOCompte daoCompte = new DAOCompte();
+	static DAOPartie daoPartie = new DAOPartie();
+	static DAOBatiment daoBatiment = new DAOBatiment();
+	static int cptPartie=0;
 
 	private int id;
 	private int nbrDeTour=100;
@@ -64,7 +70,7 @@ public class Partie {
 		return sc.nextLine();
 	}
 	
-	public void initPartie(int nbJoueur, Compte connected)
+	public int initPartie(int nbJoueur, Compte connected, Partie p)
 	{
 		for(int i = 0;i<nbJoueur;i++)
 		{
@@ -84,6 +90,8 @@ public class Partie {
 				{
 					String surnomJ = saisieString("Veuillez indiquer le surnom du joueur :");
 					Compte j = daoCompte.findBySurnom(surnomJ);
+					daoCompte.ajoutJoueur(p.getId(),j.getId());
+					
 					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)j);
@@ -96,7 +104,10 @@ public class Partie {
 					String nom = saisieString("\nVeuillez indiquez votre nom : ");
 					String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez être reconnu durant la partie : ");
 					Joueur j = new Joueur(login, password, prenom, nom, surnom);
-					daoCompte.insert(j);
+					
+					Compte joueur = daoCompte.insert(j);
+					daoCompte.ajoutJoueur(p.getId(),joueur.getId());
+					
 					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)j);
@@ -106,10 +117,8 @@ public class Partie {
 				
 		}
 	
+		return cptPartie++;
 	}
-		
-	
-	
 	
 	public void startPartie(Partie p){
 		
@@ -129,7 +138,7 @@ public class Partie {
 					{
 						j1.joueTour(p);
 					}
-					finDePartie(p);
+					finDePartie(p);savePartie(p);
 					if(p.partieEnCours==false)
 					{
 						vainqueur = finDePartie(p);
@@ -225,4 +234,28 @@ public class Partie {
         }
 	}
 
+	public void savePartie(Partie p)
+	{
+		for(Joueur j : joueurs)
+		{
+			File monFichier = new File("partie"+p.getId()+"_joueur"+j.getId()+".txt");		
+			
+			try(FileOutputStream fos = new FileOutputStream(monFichier);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);) 
+			{
+				oos.writeObject(daoBatiment.findAllByIdCompteIdPartie(daoPartie.findIdBySurnomJoueur(j.getSurnom()).getId(), daoCompte.findBySurnom(j.getSurnom()).getId()));
+				
+			}
+			catch(Exception e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void loadPartie(Partie p)
+	{
+		
+	}
+	
 }

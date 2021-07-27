@@ -23,6 +23,9 @@ public class Joueur extends Compte{
 	private int def = 0;
 	private int att = 0;
 	private boolean tourEnCours;
+	
+	static DAOBatiment daoBatiment = new DAOBatiment();
+	static DAOPartie daoPartie = new DAOPartie();
 
 	public static int saisieInt(String msg) 
 		{
@@ -177,10 +180,11 @@ public class Joueur extends Compte{
 		}
 	}
 	
-	public void constructBat(Batiment bat)  // Construction d'un batiment (ajout � la liste/actuAtt/ActuDef/ActuRessources)
+	public void constructBat(Batiment bat, Partie p)  // Construction d'un batiment (ajout � la liste/actuAtt/ActuDef/ActuRessources)
 	{
 		List<Batiment> tmp_constructions = getConstruction();
-		tmp_constructions.add(bat);
+		Batiment batiment = daoBatiment.ajoutBatiment(this.getId(),p.getId(),bat);
+		tmp_constructions.add(batiment);
 		setConstruction(tmp_constructions);	
 		
 		setConstruction(this.actuDef());
@@ -385,7 +389,7 @@ public class Joueur extends Compte{
 				if (verification(batiment)) {
 					
 					//System.out.println(batiment.toStringName());
-					constructBat(batiment);
+					constructBat(batiment,p);
 					System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
 				}
 				

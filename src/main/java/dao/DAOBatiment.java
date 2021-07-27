@@ -31,7 +31,7 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 		return null;
 	}
 
-	public List<Batiment> findAllByIdPartie(Integer idCompte, Integer idPartie)
+	public List<Batiment> findAllByIdCompteIdPartie(Integer idCompte, Integer idPartie)
 	{
 		List<Batiment> batiments=new ArrayList();
 		try {
@@ -135,6 +135,29 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO batiment (id_compte, id_partie,nom, niveau, pts_de_defense) VALUES (?,?,?,?,?)");
 			ps.setInt(1,b.getIdCompte());
 			ps.setInt(2,b.getIdPartie());
+			ps.setString(3,b.getNom());
+			ps.setInt(4,b.getLevel());
+			ps.setDouble(5,b.getDef());
+			
+			ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+	
+	public Batiment ajoutBatiment(int idCompte, int idPartie, Batiment b) {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO batiment (id_compte, id_partie,nom, niveau, pts_de_defense) VALUES (?,?,?,?,?)");
+			ps.setInt(1,idCompte);
+			ps.setInt(2,idPartie);
 			ps.setString(3,b.getNom());
 			ps.setInt(4,b.getLevel());
 			ps.setDouble(5,b.getDef());

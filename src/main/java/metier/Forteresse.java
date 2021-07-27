@@ -15,6 +15,7 @@ public class Forteresse extends Defense {
 	
 	public Forteresse() 	
 	{
+		setNom("forteresse");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 		setDef(100);
 	}
