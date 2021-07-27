@@ -22,6 +22,7 @@ public class Joueur extends Compte{
 	
 	private int def=0;
 	private int att=0;
+	private boolean tourEnCours;
 
 	public static int saisieInt(String msg) 
 		{
@@ -92,6 +93,14 @@ public class Joueur extends Compte{
 
 	public void setAtt(int att) {
 		this.att = att;
+	}
+	
+	public boolean getTourEnCours() {
+		return tourEnCours;
+	}
+
+	public void setTourEnCours(boolean tourEnCours) {
+		this.tourEnCours = tourEnCours;
 	}
 
 	public boolean verification (Batiment bat) // Verification du stock de ressources du joueur permet d'acheter un batiment (renvoie un bool)
@@ -249,7 +258,7 @@ public class Joueur extends Compte{
 		p.actuGain(pierre);
 		m.actuGain(minerais);
 		
-		System.out.println("vous avez obtenue " + bois + " bois" + pierre + " pierre(s)" + minerais + " minerais!");	
+		System.out.println("\nVous avez obtenu " + bois + " bois" + pierre + " pierre(s)" + minerais + " minerais!");	
 	}
 	
 	public void menuJoueur(Partie p){
@@ -265,11 +274,9 @@ public class Joueur extends Compte{
 			case 1 : menuConstruction(p); break;
 			case 2 : menuAmeliorer(p); break; // TODO: a finir en intégrant la méthode pour upgrader le batiment
 			case 3 : menuAttaquer(p);break; // TODO: Menu attaque
-			case 4 : break; // TODO: fin de tour
+			case 4 : this.setTourEnCours(false);break; // TODO: fin de tour
 			default : System.out.println("Mauvaise valeur");
 		}
-		
-		menuJoueur(p);
 		
 	}
 	
