@@ -366,6 +366,7 @@ public class Joueur extends Compte{
 		System.out.println("---- \n");
 		
 		displayOwnedConstruction();
+		System.out.println("-------------------------------- \n");
 		displayConstructionPossibilites();
 		displayConstructionNoPossibilites();
 		
@@ -557,16 +558,15 @@ public class Joueur extends Compte{
 			System.out.print(r.toStringName() + ": "+r.getStock() + "  ");
 		}
 		
-		System.out.println("");
+		System.out.println("\n-------------------------------- \n");
 	}
 	
 	public void displayConstructionPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilite de construction" + "\n");
+		
 		//System.out.printf("%25s %5s %5s %5s\n","Nom", "level", "def", "att");
-		
 		afficheListeRessources();
-		
+		System.out.printf("%s","POSSIBILITE DE CONSTRUCTION" + "\n");
 		for (ListeBatiment b : ListeBatiment.values()) { 
     		Batiment batiment = stringToBatiment(b.toString());
     		//System.out.println(batiment.toStringName());
@@ -585,13 +585,14 @@ public class Joueur extends Compte{
 	
 	public void displayConstructionNoPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilite de construction - impossible de� construire" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
+		System.out.printf("%s","IMPOSSIBLE DE CONSTRUIRE:" + "\n");
+		//System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 				
 		for (ListeBatiment b : ListeBatiment.values()) { 
     		Batiment batiment = stringToBatiment(b.toString());
     		if(verification(batiment)==false){
 				System.out.println(batiment.toStringWithCost());
+				System.out.println("-------------------------------- \n");
 			}
 		}
 		
