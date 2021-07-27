@@ -280,7 +280,7 @@ public class Joueur extends Compte{
 			case 1 : menuConstruction(p); break;
 			case 2 : menuAmeliorer(p); break; // TODO: a finir en intï¿½grant la mï¿½thode pour upgrader le batiment
 			case 3 : menuAttaquer(p);break; // TODO: Menu attaque
-			case 4 : this.setTourEnCours(false);break; // TODO: fin de tour
+			case 4 : menuFinDeTour(p);break; // TODO: fin de tour
 			default : System.out.println("Mauvaise valeur");
 		}
 		
@@ -313,8 +313,6 @@ public class Joueur extends Compte{
 			}
 		}
 
-		menuAmeliorer(p);
-		
 	}
 	
 	
@@ -375,7 +373,6 @@ public class Joueur extends Compte{
 			}
 		}
 
-		menuConstruction(p);
 		
 	}
 	
@@ -576,8 +573,7 @@ public class Joueur extends Compte{
 			System.out.println("Le numero de batiment n'existe pas!'");
 			menuAttaqueChoixBatiment(j,p);
 		}
-		 
-		menuAttaqueJoueur(p);
+
 	}
 	
 	public void menuAttaqueJoueur(Joueur j)
@@ -588,10 +584,17 @@ public class Joueur extends Compte{
 		
 	public void menuFinDeTour(Partie p)
 	{
+		this.setTourEnCours(false);
 		System.out.printf("%s","FIN DE TOUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
 		System.out.printf("%s","Vous avez effectue votre action de jeu, au prochain joueur de jouer !");
 		
-		// TO DO : Afficher le rï¿½capitulatif de l'action rï¿½alisï¿½e par le joueur
+		// TO DO : Mettre le boolean des batiments d'attaque à false
+		for(Batiment batiment : this.construction){
+			if(batiment instanceof Attaque)
+			{
+				((Attaque) batiment).setUsed(false);
+			}
+		}
 	}	
 	
 }

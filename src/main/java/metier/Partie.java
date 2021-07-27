@@ -116,13 +116,13 @@ public class Partie {
 				for(int j=0;j<joueurs.size();j++)
 				{
 					Joueur j1 = joueurs.get(j);
-					System.out.println("\nDébut de tour de "+j1.getSurnom());
+					System.out.println("\nTour "+(nbrDeTour+1)+" - " + j1.getPrenom() + " " + j1.getNom() + " " + j1.getSurnom() + "\n");
 					j1.setTourEnCours(true);
 					while(j1.getTourEnCours()==true)
 					{
 						j1.joueTour(p);
 					}
-					System.out.println("\nTour terminé pour "+j1.getSurnom());
+				
 				}
 				
 			}
