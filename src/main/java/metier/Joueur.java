@@ -268,7 +268,13 @@ public class Joueur extends Compte{
 		System.out.printf("%s\n","2- Am�liorer");
 		System.out.printf("%s\n","3- Attaquer");
 		System.out.printf("%s\n","4- Fin de tour");
+		
+		System.out.println(this.getStock());
+		
 		int choix = saisieInt("Choisir un menu");
+		
+		
+		
 		switch(choix) 
 		{
 			case 1 : menuConstruction(p); break;
@@ -434,10 +440,14 @@ public class Joueur extends Compte{
 	public void displayConstructionPossibilites(){
 		
 		System.out.printf("%s","Liste des possibilité de construction" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
+		System.out.printf("%25s %5s %5s %5s\n","Nom", "level", "def", "att");
+		
+		System.out.println(this.getStock());
 		
 		for (ListeBatiment b : ListeBatiment.values()) { 
     		Batiment batiment = stringToBatiment(b.toString());
+    		System.out.println(batiment.getNom());
+    		System.out.println(batiment.getCost());
     		if(verification(batiment)){
 				System.out.println(batiment.toStringWithCost());
 			}
@@ -449,7 +459,7 @@ public class Joueur extends Compte{
 	
 	public void displayConstructionNoPossibilites(){
 		
-		System.out.printf("%s","Liste des possibilité de construction" + "\n");
+		System.out.printf("%s","Liste des possibilité de construction - impossible à construire" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 				
 		for (ListeBatiment b : ListeBatiment.values()) { 
@@ -459,7 +469,7 @@ public class Joueur extends Compte{
 			}
 		}
 		
-		System.out.println("\n");
+		System.out.println("---- \n");
 		
 	}
 	

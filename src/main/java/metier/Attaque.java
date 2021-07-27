@@ -13,10 +13,8 @@ public abstract class Attaque extends Batiment{
 	protected Cuivre cu = new Cuivre(0);
 	
 	
-	public Attaque() 
-	
-	{
-		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+	public Attaque(){
+		//cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 	
 	public Attaque(String nom, int level, double def){

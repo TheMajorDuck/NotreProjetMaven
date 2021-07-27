@@ -10,10 +10,8 @@ public abstract class Defense extends Batiment {
 	protected Cuivre cu = new Cuivre(0);
 	
 	
-	public Defense() 
-	
-	{
-		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+	public Defense() {
+		//cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 
 	public Defense(String nom, int level, double def){
