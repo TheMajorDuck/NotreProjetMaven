@@ -363,12 +363,12 @@ public class Joueur extends Compte{
 			//System.out.println(batiment.toStringName());
 			if (batiment instanceof Batiment){
 				
-				System.out.println(batiment.toStringName());
+				//System.out.println(batiment.toStringName());
 				if (verification(batiment)) {
 					
 					//System.out.println(batiment.toStringName());
 					constructBat(batiment);
-					System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
+					System.out.println("Un batiment " + batiment.toStringName() + " a ete construit \n");
 				}
 				
 			} else {
@@ -509,7 +509,7 @@ public class Joueur extends Compte{
 	public void displayBatimentAttaque()
 	{
 		System.out.printf("%s","Liste de vos batiments d'attaque" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att", "used");
+		//System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att", "used");
 		
 		for(Batiment batiment : construction){
 			if(batiment instanceof Attaque)
@@ -523,13 +523,13 @@ public class Joueur extends Compte{
 	public void displayOwnedConstruction(){
 		
 		System.out.printf("%s","Liste de vos batiments" + "\n"); // TODO: "de vos batiment" mais la fonction est appelée aussi pour afficher les batiments de l'ennemi dans la fonction menuAttaqueChoixBatiment
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
+		//System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 		
 		for(Batiment batiment : this.construction){
 			System.out.println(batiment);
 		}
 		
-		System.out.println("---- \n");
+		System.out.println("-------------------------------- \n");
 		
 	}
 	
@@ -557,10 +557,11 @@ public class Joueur extends Compte{
     		if(verification(batiment)){
     			System.out.println(batiment.toStringName());
 				System.out.println(batiment.toStringWithCost());
+				System.out.println("--------------------------------");
 			}
 		}
 		
-		System.out.println("---- \n");
+		System.out.println("-------------------------------- \n");
 		
 	}
 	
