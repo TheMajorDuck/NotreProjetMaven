@@ -108,9 +108,9 @@ public abstract class Batiment {
 	}
 
 
-	protected Batiment upgrade(Batiment bati) 
+	public void upgrade() 
 	{		
-		return bati;
+		return;
 	}
 
 	protected void downgrade() {

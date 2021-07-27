@@ -63,7 +63,7 @@ public class Test {
 	}
 	
 	public static void seConnecter() {
-		String compteCree = saisieString("\nAvez-vous déjà créé un compte ? (y/n)");
+		String compteCree = saisieString("\nAvez-vous dï¿½jï¿½ crï¿½ï¿½ un compte ? (y/n)");
 		
 		if(compteCree.equals("y"))
 		{
@@ -90,7 +90,7 @@ public class Test {
 			String password = saisieString("\nSaisissez votre mot de passe : ");
 			String prenom = saisieString("\nVeuillez indiquez votre prenom : ");
 			String nom = saisieString("\nVeuillez indiquez votre nom : ");
-			String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez être reconnu durant la partie : ");
+			String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez ï¿½tre reconnu durant la partie : ");
 			Joueur j = new Joueur(login, password, prenom, nom, surnom);
 			daoCompte.insert(j);
 			
@@ -130,7 +130,7 @@ public class Test {
 	
 	public static void menuJoueur() {
 		System.out.println("\nMenu Joueur");
-		System.out.println("1- Démarrer une nouvelle partie");
+		System.out.println("1- Dï¿½marrer une nouvelle partie");
 		System.out.println("2- Reprendre une partie existante");
 		System.out.println("3- Se deconnecter");
 		int choix = saisieInt("Choisir un menu");
@@ -163,9 +163,9 @@ public class Test {
 	
 	public static void menuPartie(Partie p)
 	{
-		System.out.println("\nVous avez démarré une nouvelle partie de 'Notre Projet' ! ");
-		System.out.println("Etes-vous prêt à vous entretuer ?");
-		System.out.println("1- Oui je vais tous vous démonter !! ");
+		System.out.println("\nVous avez dï¿½marrï¿½ une nouvelle partie de 'Notre Projet' ! ");
+		System.out.println("Etes-vous prï¿½t ï¿½ vous entretuer ?");
+		System.out.println("1- Oui je vais tous vous dï¿½monter !! ");
 		System.out.println("2- Laisse-moi quelques minutes stp");
 		System.out.println("3- Se deconnecter");
 		int choix = saisieInt("Choisir un menu");

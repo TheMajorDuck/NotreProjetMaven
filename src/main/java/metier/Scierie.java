@@ -33,9 +33,9 @@ public class Scierie extends Production{
 		super(idCompte, idPartie,nom, level, def);
 	}
 	
-	protected Scierie upgrade(Scierie bati) 
+	public void upgrade() 
 	{	
-		List  <Ressource> tmpCost= new ArrayList<Ressource>();
+		List<Ressource> tmpCost= new ArrayList<Ressource>();
 		tmpCost = this.cost;
 		for (Ressource r: tmpCost)
 		{
@@ -44,12 +44,14 @@ public class Scierie extends Production{
 				r.setStock(r.getStock()+3);
 			}
 		}
-		bati.setAtt(bati.getAtt()+0);
-		bati.setDef(bati.getDef()+20);
-		bati.setCost(tmpCost);
-		bati.setLevel(bati.getLevel()+1);
-		return bati;
+		this.setAtt(this.getAtt()+0);
+		this.setDef(this.getDef()+100);
+		this.setLevel(this.getLevel()+1);
+		this.setCost(tmpCost);
+		
+		return;
 	}
+	
 	@Override
 	public String toStringName() {
 		return "Scierie";

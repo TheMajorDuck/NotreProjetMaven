@@ -1,5 +1,8 @@
 package metier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Defense extends Batiment {
 	protected Bois b = new Bois(0);
 	protected Pierre p = new Pierre(0);
@@ -23,10 +26,26 @@ public abstract class Defense extends Batiment {
 		super(idCompte, idPartie,nom, level, def);
 	}
 	
-	protected Batiment upgrade(Batiment bati) 
-	{		
-		return bati;
+	public void upgrade() 
+	{	
+		List  <Ressource> tmpCost= new ArrayList<Ressource>();
+		tmpCost = this.cost;
+		for (Ressource r: tmpCost)
+		{
+			if (r.getStock()!=0) 
+			{
+				r.setStock(r.getStock()+3);
+			}
+		}
+		this.setAtt(this.getAtt()+0);
+		this.setDef(this.getDef()+20);
+		this.setCost(tmpCost);
+		this.setLevel(this.getLevel()+1);
+		return;
 	}
+	
+	
+	
 	@Override
 	public String toStringName() {
 		return "def";

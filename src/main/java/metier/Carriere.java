@@ -87,7 +87,7 @@ public class Carriere extends Production {
 		this.cu = cu;
 	}
 	//---------------------------------------------------------------------
-	protected Carriere upgrade(Carriere bati) 
+	public void upgrade() 
 	{	
 		List  <Ressource> tmpCost= new ArrayList<Ressource>();
 		tmpCost = this.cost;
@@ -98,11 +98,11 @@ public class Carriere extends Production {
 				r.setStock(r.getStock()+3);
 			}
 		}
-		bati.setAtt(bati.getAtt()+0);
-		bati.setDef(bati.getDef()+20);
-		bati.setCost(tmpCost);
-		bati.setLevel(bati.getLevel()+1);
-		return bati;
+		this.setAtt(this.getAtt()+0);
+		this.setDef(this.getDef()+20);
+		this.setCost(tmpCost);
+		this.setLevel(this.getLevel()+1);
+		return;
 	}
 	
 	@Override

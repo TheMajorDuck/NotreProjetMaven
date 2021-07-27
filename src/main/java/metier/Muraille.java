@@ -28,22 +28,23 @@ public class Muraille  extends Defense{
 		
 	}
 	
-	protected Muraille upgrade(Muraille bati) 
+	public void upgrade() 
 	{	
-		List  <Ressource> tmpCost= new ArrayList<Ressource>();
+		List<Ressource> tmpCost= new ArrayList<Ressource>();
 		tmpCost = this.cost;
 		for (Ressource r: tmpCost)
 		{
 			if (r.getStock()!=0) 
 			{
-				r.setStock(r.getStock()+2);
+				r.setStock(r.getStock()+3);
 			}
 		}
-		bati.setAtt(bati.getAtt()+0);
-		bati.setDef(bati.getDef()+100);
-		bati.setCost(tmpCost);
-		bati.setLevel(bati.getLevel()+1);
-		return bati;
+		this.setAtt(this.getAtt()+0);
+		this.setDef(this.getDef()+100);
+		this.setLevel(this.getLevel()+1);
+		this.setCost(tmpCost);
+		
+		return;
 	}
 	
 	@Override
