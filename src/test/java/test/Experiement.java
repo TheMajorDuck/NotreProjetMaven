@@ -10,7 +10,16 @@ public class Experiement {
 		Forteresse f = new Forteresse();
 		
 		System.out.println(f.getCost());
-
+		
+		Joueur j = new Joueur("bla", "bla");
+		
+		j.constructBat(f);
+		j.constructBat(f);
+		j.constructBat(f);
+		
+		j.getConstruction();
+		
+		//j.displayOwnedConstruction();
 
 	}
 

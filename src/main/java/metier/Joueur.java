@@ -186,7 +186,7 @@ public class Joueur extends Compte{
 		}
 	}
 	
-	public void construction (Batiment bat)  // Construction d'un batiment (ajout � la liste/actuAtt/ActuDef/ActuRessources)
+	public void constructBat(Batiment bat)  // Construction d'un batiment (ajout � la liste/actuAtt/ActuDef/ActuRessources)
 	{
 		this.construction.add(bat);
 		this.construction = actuDef();
@@ -361,13 +361,24 @@ public class Joueur extends Compte{
 		
 		System.out.printf("%s\n","0- Menu pr�c�dent");
 		String choix = saisieString("Choisir un b�timent � construire");
+		System.out.println(choix);
 		if(choix.equals("0")){
 			menuJoueur(p);
+			System.out.println(choix);
 		} else {
+			System.out.println(choix);
 			Batiment batiment = stringToBatiment(choix);	
+			System.out.println(batiment.toStringName());
 			if (batiment instanceof Batiment){
-				construction(batiment);
-				System.out.println("Un b�timent " + batiment.getNom() + " a �t� construit");
+				
+				System.out.println(batiment.toStringName());
+				if (verification(batiment)) {
+					
+					System.out.println(batiment.toStringName());
+					constructBat(batiment);
+					System.out.println("Un b�timent " + batiment.toStringName() + " a �t� construit");
+				}
+				
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
 			}
@@ -391,6 +402,7 @@ public class Joueur extends Compte{
 				case "Mine" : batiment = new Mine();break;
 				case "Muraille" : batiment = new Muraille();break;
 				case "Scierie" : batiment = new Scierie();break;
+				default: System.out.println("Ceci n'est pas un batiment");break;
 			}
 			
 		
@@ -439,7 +451,7 @@ public class Joueur extends Compte{
 		System.out.printf("%s","Liste de vos batiments" + "\n");
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 		
-		for(Batiment batiment : construction){
+		for(Batiment batiment : this.construction){
 			System.out.println(batiment);
 		}
 		
@@ -456,8 +468,6 @@ public class Joueur extends Compte{
 		
 		for (ListeBatiment b : ListeBatiment.values()) { 
     		Batiment batiment = stringToBatiment(b.toString());
-    		System.out.println(batiment.getNom());
-    		System.out.println(batiment.getCost());
     		if(verification(batiment)){
 				System.out.println(batiment.toStringWithCost());
 			}
