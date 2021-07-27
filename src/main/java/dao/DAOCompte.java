@@ -205,4 +205,22 @@ public class DAOCompte implements IDAO<Compte,Integer>{
 		return c;
 	}
 	
+	public void ajoutJoueur(int idPartie, int idCompte) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO joueur (id_partie,id_compte) VALUES (?,?)");
+
+			ps.setInt(1, idPartie);
+			ps.setInt(2, idCompte);
+			ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+		}
+		catch(Exception e) {e.printStackTrace();}
+		
+	}
+	
 }
+

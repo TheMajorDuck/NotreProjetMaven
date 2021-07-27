@@ -16,7 +16,6 @@ public class Test {
 	static DAOCompte daoCompte = new DAOCompte();
 	static DAOPartie daoPartie = new DAOPartie();
 	static DAOBatiment daoBatiment = new DAOBatiment();
-	static int cptPartie = 0;
 	
 	
 	public static int saisieInt(String msg) 
@@ -151,14 +150,14 @@ public class Test {
 		int nbTour = 100;
 		
 		connected.toString();
-		cptPartie++;
 		
-		Partie nouvPartie = new Partie(cptPartie,nbTour);
-		nouvPartie = new Partie(cptPartie,nbTour);
-		nouvPartie.initPartie(nbJoueur, connected);
+		Partie nouvPartie = new Partie(0,nbTour);
+		Partie p = daoPartie.insert(nouvPartie);
+		daoCompte.ajoutJoueur(p.getId(),connected.getId());
+		p.initPartie(nbJoueur, connected,p);
 		
-		menuPartie(nouvPartie);
-		return nouvPartie;
+		menuPartie(p);
+		return p;
 	}
 	
 	public static void menuPartie(Partie p)
@@ -177,13 +176,9 @@ public class Test {
 		case 3 : connected=null;menuPrincipal();break;
 		}
 	}
-	
+		
 	public static void loadPartie()
 	{
 		
 	}
-
-	
-	
-	
 }

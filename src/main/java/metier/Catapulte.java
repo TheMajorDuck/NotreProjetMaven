@@ -18,6 +18,7 @@ public class Catapulte extends Attaque {
 	public Catapulte() 
 	
 	{
+		setNom("catapulte");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 		setDef(20);
 		setAtt(20);
