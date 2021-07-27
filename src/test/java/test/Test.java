@@ -147,8 +147,9 @@ public class Test {
 	public static Partie nouvPartie()
 	{
 		int nbJoueur = saisieInt("\nChoisissez le nombre de joueurs (entre 2 et 4)");
-		int nbTour = saisieInt("\nChoisissez le nombre de tours pour votre partie (entre 5 et 10)");
-	
+		//int nbTour = saisieInt("\nChoisissez le nombre de tours pour votre partie (entre 5 et 10)");
+		int nbTour = 100;
+		
 		connected.toString();
 		cptPartie++;
 		
