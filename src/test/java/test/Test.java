@@ -93,6 +93,21 @@ public class Test {
 			String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez être reconnu durant la partie : ");
 			Joueur j = new Joueur(login, password, prenom, nom, surnom);
 			daoCompte.insert(j);
+			
+			connected = daoCompte.seConnecter(login,password);
+			
+			if(connected instanceof Admin) 
+			{
+				menuAdmin();
+			}
+			else if(connected instanceof Joueur) 
+			{
+				menuJoueur();
+			}
+			else 
+			{
+				System.out.println("Identifiants invalides !");
+			}
 		}
 	}
 
