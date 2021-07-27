@@ -13,13 +13,14 @@ public class Merveille  extends Batiment{
 	protected Fer f = new Fer(2);
 	protected Cuivre cu = new Cuivre(2);
 	
-	private double def = 100;
+	private double def;
 	
 	public Merveille() 
 	
 	{
 		super();
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(100);
 	}
 
 	public Merveille(String nom, int level, double def){

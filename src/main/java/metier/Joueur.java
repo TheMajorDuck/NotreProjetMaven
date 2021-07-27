@@ -105,27 +105,17 @@ public class Joueur extends Compte{
 
 	public boolean verification (Batiment bat) // Verification du stock de ressources du joueur permet d'acheter un batiment (renvoie un bool)
 	{
-		int nbBat = 0;
-		int nbJoueur = 0;
-		for (Ressource r: bat.getCost())
-		{
-			if (r.getStock()>0)
-			{
-				nbBat++;
-			}
-		}
 		for (Ressource rj : this.stock)
 		{
 			for (Ressource r: bat.getCost())
 			{
-				if (r.getClass().getName().equals(rj.getClass().getName()) && r.getStock()==rj.getStock())
+				if (r.getClass().getName().equals(rj.getClass().getName()) && r.getStock()>rj.getStock())
 				{
-					nbJoueur++;
+					return false;
 				}
 			}
 		}
-		if (nbBat == nbJoueur) {return true;}
-		else {return false;}
+		return true;
 	}
 	
 	public void attaque (Joueur enemi) // Attaque de tous les batiment d'un autre joueur
@@ -192,13 +182,13 @@ public class Joueur extends Compte{
 		tmp_constructions.add(bat);
 		setConstruction(tmp_constructions);	
 		
-		setConstruction(actuDef());
-//		this.construction = actuDef();
-//		this.construction = actuAtt();
-//		for (Ressource r : this.stock)	//modification du stock de ressources du joueur en fonction du cout (cf. methode actuAchat de la classe ressources)
-//		{
-//			r.actuAchat(bat.getCost());
-//		}
+		setConstruction(this.actuDef());
+		setConstruction(this.actuAtt());
+
+		for (Ressource r : this.stock)	//modification du stock de ressources du joueur en fonction du cout (cf. methode actuAchat de la classe ressources)
+		{
+			r.actuAchat(bat.getCost());
+		}
 	}
 	
 	public ArrayList <Batiment> actuAtt()  //Permet d'actualiser les point d'attaque du joueur ainsi que la liste des batiments du joueur (ATTENTION RENVOI UNE LISTE !!)
