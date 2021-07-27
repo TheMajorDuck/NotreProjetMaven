@@ -37,5 +37,9 @@ public abstract class Transformation extends Batiment{
 		return bati;
 	}
 
+	@Override
+	public String toStringName() {
+		return "Trans";
+	}
 	
 }

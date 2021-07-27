@@ -5,6 +5,13 @@ import java.util.List;
 
 public class Bois extends Ressource{
 
+	
+	@Override
+	public String toStringName() {
+		return "Bois";
+	}
+
+
 	public Bois(int stock) {
 		super(stock);
 		// TODO Auto-generated constructor stub

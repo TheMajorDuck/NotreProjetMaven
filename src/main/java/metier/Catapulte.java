@@ -104,4 +104,8 @@ public class Catapulte extends Attaque {
 		bati.setLevel(bati.getLevel()+1);
 		return bati;
 	}
+	@Override
+	public String toStringName() {
+		return "Catapulte";
+	}
 }
