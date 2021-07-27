@@ -15,5 +15,8 @@ public class Bastide extends Defense {
 	{
 		super(idCompte, idPartie,nom, level, def);
 	}
-	
+	@Override
+	public String toStringName() {
+		return "Bastide";
+	}
 }

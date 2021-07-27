@@ -1,5 +1,10 @@
 package metier;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -108,16 +113,116 @@ public class Partie {
 	
 	public void startPartie(Partie p){
 		
-		partieEnCours=true;
+		p.partieEnCours=true;
+		Joueur vainqueur = null;
 		
-		while(partieEnCours){
-			for(Joueur joueur : joueurs){
-				joueur.joueTour(p);	// Pioche des ressources et affiche son menu de joueur
+		while(p.partieEnCours){
+			for(int i = 1;i<=nbrDeTour;i++)
+			{
+				for(int j=0;j<joueurs.size();j++)
+				{
+					Joueur j1 = joueurs.get(j);
+					System.out.println("\nTour "+(i)+" - " + j1.getPrenom() + " " + j1.getNom() + " " + j1.getSurnom() + "\n");
+					j1.setTourEnCours(true);
+					j1.piocherRessources();
+					while(j1.getTourEnCours()==true)
+					{
+						j1.joueTour(p);
+					}
+					finDePartie(p);
+					if(p.partieEnCours==false)
+					{
+						vainqueur = finDePartie(p);
+						break;
+					}
+				}
+				if(p.partieEnCours==false)
+				{
+					break;
+				}
+			}
+			if(p.partieEnCours==false)
+			{
+				break;
 			}
 		}
-		
+		if(p.partieEnCours==false)
+		{
+			menuFinDePartie(p,vainqueur);
+		}
 	}
 	
+
+	public Joueur finDePartie(Partie p)
+	{
+		Joueur vainqueur = null;
+		for(Joueur joueur : joueurs)
+		{
+			int somme = 0;
+			
+			for(int i=0;i<joueurs.size();i++)
+			{
+				somme+=(joueurs.get(i)).getDef();
+			}
+			
+			if(somme-joueur.getDef()==0)
+			{
+				p.partieEnCours=false;
+				vainqueur = joueur;
+			}
+			
+			else 
+			{
+				for(Batiment b : joueur.getConstruction())
+				{
+					if(b.toStringName().equals("Merveille"))
+					{
+						if(b.getLevel()==5)
+						{
+							p.partieEnCours=false;
+							vainqueur = joueur;
+						}
+					}
+				}
+			}
+		}
+		return vainqueur;
+	}
 	
-	
+	public void menuFinDePartie(Partie p, Joueur vainqueur)
+	{
+		System.out.println("\n\nEt nous avons notre grand vainqueur : "+vainqueur.getSurnom()+" ("+vainqueur.getPrenom()+" "+vainqueur.getNom()+") !!!\n");
+		
+		int width = 100;
+        int height = 30;
+
+        //BufferedImage image = ImageIO.read(new File("/Users/mkyong/Desktop/logo.jpg"));
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("SansSerif", Font.BOLD, 20));
+
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        graphics.drawString("Victoire", 10, 20);
+
+        //save this image
+        //ImageIO.write(image, "png", new File("/users/mkyong/ascii-art.png"));
+
+        for (int y = 0; y < height; y++) {
+            StringBuilder sb = new StringBuilder();
+            for (int x = 0; x < width; x++) {
+
+                sb.append(image.getRGB(x, y) == -16777216 ? " " : "0");
+
+            }
+
+            if (sb.toString().trim().isEmpty()) {
+                continue;
+            }
+
+            System.out.println(sb);
+        }
+	}
+
 }

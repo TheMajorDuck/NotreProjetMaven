@@ -40,7 +40,10 @@ public class Minerais extends Ressource{
 		super.actuGain(gain);
 	}
 
-
+	@Override
+	public String toStringName() {
+		return "Minerais";
+	}
 	
 
 }

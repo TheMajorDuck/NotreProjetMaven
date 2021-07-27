@@ -11,13 +11,12 @@ public class Forteresse extends Defense {
 	protected Gold g = new Gold(0);
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
-	
 	protected double def = 100;
 	
-	public Forteresse() 
-	
+	public Forteresse() 	
 	{
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(100);
 	}
 
 	public Forteresse(String nom, int level, double def){
@@ -29,7 +28,7 @@ public class Forteresse extends Defense {
 		super(idCompte, idPartie,nom, level, def);
 	}
 	
-	
+		
 	protected Forteresse upgrade(Forteresse bati) 
 	{	
 		List  <Ressource> tmpCost= new ArrayList<Ressource>();
@@ -48,5 +47,9 @@ public class Forteresse extends Defense {
 		return bati;
 	}
 	
+	@Override
+	public String toStringName() {
+		return "Forteresse";
+	}
 	
 }

@@ -22,10 +22,8 @@ public abstract class Batiment {
 	protected Cuivre cu = new Cuivre(0);
 	
 	
-	public Batiment() 
-	
-	{
-		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+	public Batiment() {
+		//cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 	
 	public Batiment(String nom, int level, double def)
@@ -119,15 +117,18 @@ public abstract class Batiment {
 
 	}
 	
-	@Override
+	
 	public String toString() {		
-		return String.format("%25s %5d %5f %5f", this.nom, this.level, this.def, this.att);
+		return String.format("Nom: "+ this.nom + "  Niveau: " + this.level+ "  Defense: " +this.def + "  Attaque: " +this.att);
 	}
 	
+	public String toStringName() {
+		return "Batiment";
+	}
 		
 	public String toStringWithCost() {		
 		
-		String outputText = String.format("%25s %5d %5f %5f ", this.nom, this.level, this.def, this.att);
+		String outputText = String.format("Nom: "+ this.toStringName() + "  Niveau: " + this.level+ "  Defense: " +this.def + "  Attaque: " +this.att);
 		
 		for(Ressource ressource :cost){
 						
@@ -135,8 +136,8 @@ public abstract class Batiment {
 			
 			if(costRessource>0){
 				
-				String nameRessource = ressource.getClass().toString();
-				outputText += String.format("-- %s %5d --", nameRessource, costRessource);
+				String nameRessource = ressource.toStringName();
+				outputText += String.format("\n Cout en "+ nameRessource +": "+ costRessource);
 				
 			}
 		}
