@@ -127,13 +127,11 @@ public class Joueur extends Compte{
 		}
 	}
 	
-	public void attaque (Joueur enemi, Batiment bat) // Attaque d'un batiment d'un autre joueur
+	public void attaque (Joueur enemi, Batiment bat, double valeurAttaque) // Attaque d'un batiment d'un autre joueur
 	{
-		for (Batiment b : enemi.getConstruction())
-		{
-			if (b.getClass()==bat.getClass()) {b.setDef(b.getDef()-this.att);}
-		}
+		bat.setDef(bat.getDef()-valeurAttaque);
 		
+		enemi.setConstruction(enemi.actuDef());
 	}
 
 	public void attaque (Joueur enemi, Attaque at, Batiment de) //Attaque d'un batiment d'un autre joueur par un batiment d'attaque
@@ -223,9 +221,6 @@ public class Joueur extends Compte{
 	
 	
 	public void joueTour(Partie p){
-		
-		// TODO: piocher ressseConnecter(login, password)ource
-		piocherRessources();
      
 		// TODO: choix de jeu menuJoueur (1- construire 2-attaquer 3-fin de tour)
 		menuJoueur(p);
@@ -408,7 +403,13 @@ public class Joueur extends Compte{
 		
 		for(Batiment b : construction)
 		{
-			if(b instanceof Attaque){cpt++;}
+			if(b instanceof Attaque)
+			{
+				if (((Attaque)b).isUsed())
+					{
+					cpt++;
+					}
+			}
 			else{}
 		}
 
@@ -418,13 +419,90 @@ public class Joueur extends Compte{
 		{return false;}
 	}
 	
-	/*public Batiment choixBatimentAttaque()
+	public double choixBatimentAttaque()
 	{
+		int cptLigne = -1;
+		int cptBatAttaque =0;
+		List<Integer> listeLigne= new ArrayList<Integer>();
+		double valeurAttaque = 0;
 		
-		return batiment;
-	}*/
+		//Affiche la liste des batiments d'attaque et leur used
+		System.out.println("Vos batiments d'attaque:");
+		for (Batiment b : construction)
+		{
+			cptLigne++;
+			if(b instanceof Attaque)
+			{
+				cptBatAttaque++;
+				listeLigne.add(cptLigne);
+				if(((Attaque) b).isUsed())
+				{
+					System.out.println("Batiment n°" +cptBatAttaque+ ": " + b + " / Batiment d'attaque déjà utilisé");
+				}
+				else 
+				{
+					System.out.println("Batiment n°" +cptBatAttaque+ ": " + b + " / Batiment d'attaque disponible");
+				}
+			}
+		}
+		System.out.printf("%s\n","MENU CHOIX DU/DES BATIMENT(S) D'ATTAQUE:");
+		System.out.printf("%s\n","1- Attaquer avec tous les batiments disponibles");
+		System.out.printf("%s\n","2- Choisir un batiment d'attaque");
+		int choix = saisieInt("Choisir un menu");
+		switch(choix) 
+		{
+			case 1 : valeurAttaque = attaqueAvecTousBatiments(); break;
+			case 2 : valeurAttaque = attaqueAvecUnBatiment(listeLigne); break; 
+			default : System.out.println("Mauvaise valeur");
+		}
+		
+		return valeurAttaque;
+	}
 	
+	private double attaqueAvecTousBatiments() {
+		double valeurAttaque = 0;
+		for (Batiment b : construction)
+		{
+			if(b instanceof Attaque || (((Attaque) b).isUsed()==false))
+			{
+				valeurAttaque = b.getAtt();
+				((Attaque) b).setUsed(true);
+			}
+		}
+		System.out.println("La valeur total de votre attaque est de " + valeurAttaque + "points");
+		return valeurAttaque;
+	}
 	
+	private double attaqueAvecUnBatiment(List<Integer> listeLigne) {
+		double valeurAttaque = 0;
+		int choix = saisieInt("Avec quel batiment voulez-vous attaquer? (n° du batiment)");
+		int ligneBatiment = listeLigne.get(choix-1);
+		int cpt = 0;
+		
+		for (Batiment b : construction)
+		{
+			if (cpt==ligneBatiment)
+			{
+				if (((Attaque) b).isUsed()) 
+				{
+					System.out.println("Ce batiment n'est pas disponible pour attaquer");
+					attaqueAvecUnBatiment(listeLigne);
+				}
+				else 
+				{
+					valeurAttaque = b.getAtt();
+					((Attaque) b).setUsed(true);
+					System.out.println("La valeur de votre attaque est de " + valeurAttaque + "points");
+				}
+				
+			}
+		}
+		
+		return valeurAttaque;
+	}
+
+
+
 	public void displayBatimentAttaque()
 	{
 		System.out.printf("%s","Liste de vos batiments d'attaque" + "\n");
@@ -441,7 +519,7 @@ public class Joueur extends Compte{
 	
 	public void displayOwnedConstruction(){
 		
-		System.out.printf("%s","Liste de vos batiments" + "\n");
+		System.out.printf("%s","Liste de vos batiments" + "\n"); // TODO: "de vos batiment" mais la fonction est appelée aussi pour afficher les batiments de l'ennemi dans la fonction menuAttaqueChoixBatiment
 		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 		
 		for(Batiment batiment : this.construction){
@@ -502,11 +580,9 @@ public class Joueur extends Compte{
 	
 	public void menuAttaquer(Partie p)
 	{
-		// TO DO : Afficher liste batiments autres joueurs
-		
+		//Vérifie si un batiment d'attaque disponible pour attaquer existe
 		if(this.getBatimentAttaque())
 		{
-			p.getJoueurs();
 		
 			for (Joueur j: p.getJoueurs())
 			{
@@ -524,79 +600,102 @@ public class Joueur extends Compte{
 			switch(choix) 
 			{
 				case 0: menuJoueur(p) ;break;
-				case 1: /*choixBatimentAttaque()*/;menuAttaqueJoueur(p);break;
+				case 1: double valeurAttaque = choixBatimentAttaque();menuAttaqueJoueur(p,valeurAttaque);break;
 				default : System.out.println("Mauvaise valeur");
 			}
 			menuAttaquer(p);
 		}
 		else
 		{
-			System.out.println("Vous n'avez pas de batiment d'attaque, quel dommage...'");
+			System.out.println("Vous n'avez pas de bâtiment d'attaque disponible pour attaquer, quel dommage...'");
+
 			menuJoueur(p);
 		}
 	}
 
 	
-	public void menuAttaqueJoueur(Partie p)
+	public void menuAttaqueJoueur(Partie p, double valeurAttaque)
 	{
 		int joueur = saisieInt("Quel joueur souhaites-tu attaquer? (1,2,3,...)");
 		Joueur ennemi = p.getJoueurs().get(joueur-1);
 				
 		System.out.printf("%s\n","MENU ATTAQUER" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
-		System.out.printf("%s\n","0- Menu precedent");
-		System.out.printf("%s\n","1- Attaquer un  batiment?");
-		System.out.printf("%s\n","2- Attaquer tous les  batiments?");
+
+		//System.out.printf("%s\n","0- Menu précédent"); // ne peut pas revenir en arrière car batiment attaque choisit et les boolean sont changés en used==true
+		System.out.printf("%s\n","1- Attaquer tous les  batiments?");
+		System.out.printf("%s\n","2- Attaquer un  seul batiment?");
+
 		int choix = saisieInt("Choisir une option");
 		
 		switch(choix) 
 		{
-			case 0: menuAttaquer(p); ;break;
-			case 1: menuAttaqueJoueur(ennemi);break;
-			case 2: menuAttaqueChoixBatiment(ennemi,p);break;
+			//case 0: menuAttaquer(p); ;break;
+			case 1: attaqueJoueur(ennemi,p,valeurAttaque);break;
+			case 2: menuAttaqueChoixBatiment(ennemi,p,valeurAttaque);break;
 			default : System.out.println("Mauvaise valeur");
 		}
 	}
 	
-	public void menuAttaqueChoixBatiment(Joueur j, Partie p)
+	public void menuAttaqueChoixBatiment(Joueur e, Partie p, double valeurAttaque)
 	{
-		// Affiche liste des batiments du joueur attaque
-		j.displayOwnedConstruction();
+
+		// Affiche liste des batiments du joueur attaqué
+		e.displayOwnedConstruction();
+
 		String nomBat = saisieString("Quel batiment voulez vous attaquer(nom)?");
 		int numBat = saisieInt("Le combientiï¿½me de "+ nomBat +"voulez vous attaquer?");
 		int i=0;
-		Boolean batOk;
+		Boolean batExiste;
 		Batiment bat;
 		
-		for (Batiment b : j.construction)
+		for (Batiment b : e.construction)
 		{
 			if (b.nom.equals(nomBat)){
 				i++;
-				batOk = true;
+				batExiste = true;
 				if(i==numBat)
 				{
-					bat = b;
-					attaque(j, bat);
+					attaque(e, b, valeurAttaque);
 				}
 			}
 		}
 		
-		if(batOk = false)
+		if(batExiste = false)
 		{
-			System.out.println("Le joueur attaque ne possede pas ce batiment!'");
-			menuAttaqueChoixBatiment(j,p);
+
+			System.out.println("Le joueur attaqué ne possède pas ce batiment!'");
+			menuAttaqueChoixBatiment(e,p,valeurAttaque);
 		}
 		if (i!=numBat)
 		{
-			System.out.println("Le numero de batiment n'existe pas!'");
-			menuAttaqueChoixBatiment(j,p);
+			System.out.println("Le numéro de batiment n'existe pas!'");
+			menuAttaqueChoixBatiment(e,p,valeurAttaque);
 		}
+		 
+		menuAttaquer(p);
 
 	}
 	
-	public void menuAttaqueJoueur(Joueur j)
+	public void attaqueJoueur(Joueur e, Partie p, double valeurAttaque)
 	{
-		// TO DO : Afficher un menu pour demander au joueur avec quel batiment il souhaite attaquer
+		double nbBatiment = e.construction.size();
+		double degatBatiment = (valeurAttaque - valeurAttaque%nbBatiment)/nbBatiment;
+		double degatReste= valeurAttaque%nbBatiment;
+		double i = 0;
 		
+		for (Batiment b : e.construction)
+		{
+			i++;
+			if(i<=degatReste) 
+			{
+				attaque(e, b, degatBatiment+1);
+			}
+			else 
+			{
+				attaque(e, b, degatBatiment);
+			}
+		}
+		menuAttaquer(p);
 	}
 		
 	public void menuFinDeTour(Partie p)
