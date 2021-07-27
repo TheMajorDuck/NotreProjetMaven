@@ -11,7 +11,6 @@ public class Forteresse extends Defense {
 	protected Gold g = new Gold(0);
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
-	
 	protected double def = 100;
 	
 	public Forteresse() 	
