@@ -40,6 +40,9 @@ public class Cuivre extends Ressource{
 		super.actuGain(gain);
 	}
 
-	
+	@Override
+	public String toStringName() {
+		return "Cuivre";
+	}
 
 }

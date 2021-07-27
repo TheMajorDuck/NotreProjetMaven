@@ -40,7 +40,10 @@ public class Gold extends Ressource{
 		super.actuGain(gain);
 	}
 
-	
+	@Override
+	public String toStringName() {
+		return "Or";
+	}
 
 	
 

@@ -38,8 +38,11 @@ public class Pierre extends Ressource{
 		// TODO Auto-generated method stub
 		super.actuGain(gain);
 	}
-
-
+	
+	@Override
+	public String toStringName() {
+		return "Pierre";
+	}
 	
 
 }

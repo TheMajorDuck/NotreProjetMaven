@@ -29,4 +29,8 @@ public abstract class Defense extends Batiment {
 	{		
 		return bati;
 	}
+	@Override
+	public String toStringName() {
+		return "def";
+	}
 }

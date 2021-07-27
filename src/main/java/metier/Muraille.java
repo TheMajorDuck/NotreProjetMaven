@@ -44,5 +44,10 @@ public class Muraille  extends Defense{
 		bati.setLevel(bati.getLevel()+1);
 		return bati;
 	}
+	
+	@Override
+	public String toStringName() {
+		return "Muraille";
+	}
 
 }
