@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Mine  extends Production {
 	protected Bois b = new Bois(3);
-	protected Pierre p = new Pierre(0);
-	protected Minerais m = new Minerais(3);
+	protected Pierre p = new Pierre(3);
+	protected Minerais m = new Minerais(0);
 	protected Charbon c = new Charbon(0);
 	protected Gold g = new Gold(0);
 	protected Fer f = new Fer(0);

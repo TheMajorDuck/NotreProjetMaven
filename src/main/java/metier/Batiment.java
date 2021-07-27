@@ -128,7 +128,7 @@ public abstract class Batiment {
 		
 	public String toStringWithCost() {		
 		
-		String outputText = String.format("Nom: "+ this.toStringName() + "  Niveau: " + this.level+ "  Defense: " +this.def + "  Attaque: " +this.att);
+		String outputText = String.format("Nom: "+ this.toStringName() + "  Niveau: " + this.level+ "  Defense: " +this.def + "  Attaque: " +this.att + "\nCout en \n");
 		
 		for(Ressource ressource :cost){
 						
@@ -137,7 +137,7 @@ public abstract class Batiment {
 			if(costRessource>0){
 				
 				String nameRessource = ressource.toStringName();
-				outputText += String.format("\n Cout en "+ nameRessource +": "+ costRessource);
+				outputText += String.format(nameRessource +": "+ costRessource+"  ");
 				
 			}
 		}

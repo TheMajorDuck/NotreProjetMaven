@@ -105,4 +105,9 @@ public class Carriere extends Production {
 		return bati;
 	}
 	
+	@Override
+	public String toStringName() {
+		return "Carriere";
+	}
+	
 }
