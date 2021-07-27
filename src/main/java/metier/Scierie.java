@@ -50,4 +50,8 @@ public class Scierie extends Production{
 		bati.setLevel(bati.getLevel()+1);
 		return bati;
 	}
+	@Override
+	public String toStringName() {
+		return "Scierie";
+	}
 }

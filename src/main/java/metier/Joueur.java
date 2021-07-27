@@ -353,17 +353,17 @@ public class Joueur extends Compte{
 		
 		if(choix.equals("0")){
 			menuJoueur(p);
-			System.out.println(choix);
+			//System.out.println(choix);
 		} else {
-			System.out.println(choix);
+			//System.out.println(choix);
 			Batiment batiment = stringToBatiment(choix);	
-			System.out.println(batiment.toStringName());
+			//System.out.println(batiment.toStringName());
 			if (batiment instanceof Batiment){
 				
 				System.out.println(batiment.toStringName());
 				if (verification(batiment)) {
 					
-					System.out.println(batiment.toStringName());
+					//System.out.println(batiment.toStringName());
 					constructBat(batiment);
 					System.out.println("Un batiment " + batiment.toStringName() + " a ete construit");
 				}
