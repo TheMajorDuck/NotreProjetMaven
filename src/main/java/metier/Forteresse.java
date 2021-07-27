@@ -29,7 +29,7 @@ public class Forteresse extends Defense {
 		super(idCompte, idPartie,nom, level, def);
 	}
 	
-	
+		
 	protected Forteresse upgrade(Forteresse bati) 
 	{	
 		List  <Ressource> tmpCost= new ArrayList<Ressource>();
@@ -48,5 +48,9 @@ public class Forteresse extends Defense {
 		return bati;
 	}
 	
+	@Override
+	public String toStringName() {
+		return "Forteresse";
+	}
 	
 }

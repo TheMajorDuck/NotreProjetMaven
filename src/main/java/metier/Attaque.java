@@ -39,6 +39,9 @@ public abstract class Attaque extends Batiment{
 	{		
 		return bati;
 	}
-	
+	@Override
+	public String toStringName() {
+		return "Attaque";
+	}
 	
 }
