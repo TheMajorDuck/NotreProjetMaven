@@ -48,5 +48,8 @@ public class Merveille  extends Batiment{
 		bati.setCost(tmpCost);
 		return bati;
 	}
-	
+	@Override
+	public String toStringName() {
+		return "Merveille";
+	}
 }

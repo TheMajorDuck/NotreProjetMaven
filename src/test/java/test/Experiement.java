@@ -1,6 +1,6 @@
 package test;
 
-import metier.Forteresse;
+import metier.*;
 
 public class Experiement {
 
@@ -10,6 +10,7 @@ public class Experiement {
 		Forteresse f = new Forteresse();
 		
 		System.out.println(f.getCost());
+
 
 	}
 

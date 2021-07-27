@@ -303,6 +303,9 @@ public class Joueur extends Compte{
 			if (batiment instanceof Batiment){
 				//construction(batiment); // TODO: call update
 				System.out.println("Un b�timent " + batiment.getNom() + " a �t� am�liorer");
+				batiment.upgrade(batiment);
+				System.out.println("Un b�timent " + batiment.toStringName() + " a �t� am�liorer");
+				System.out.println(batiment);
 			} else {
 				System.out.println("Ceci n'est pas un batiment");
 			}
@@ -316,7 +319,10 @@ public class Joueur extends Compte{
 	public void displayOwnedConstWithUpdatePossibilities(){
 		
 		System.out.printf("%s","Liste de vos batiments" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
+		
+		for (Batiment b: this.construction) {
+			System.out.println(b.toStringName() +" Niveau: "+ b.getLevel()+"  Def:" +b.getDef()+ "  Att:"+b.getAtt());
+		}
 			
 		for(Batiment batiment : construction){
 			if(verification(batiment)){
@@ -329,11 +335,15 @@ public class Joueur extends Compte{
 	public void displayOwnedConstWithUpdateNoPossibilities(){
 		
 		System.out.printf("%s","Liste de vos batiments" + "\n");
-		System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
+		for (Batiment b: this.construction) {
+			System.out.println(b.toStringName() +" Niveau: "+ b.getLevel()+"  Def:" +b.getDef()+ "  Att:"+b.getAtt());
+		}
+	
+		//System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 			
 		for(Batiment batiment : construction){
 			if(verification(batiment)==false){
-				System.out.println("\u001B[31m" + batiment.toStringWithCost() + "\u001B[0m");
+				System.out.println(batiment.toStringWithCost());
 			}
 		}
 	}

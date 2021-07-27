@@ -56,5 +56,9 @@ public class Four  extends Transformation {
 
 	}
 
+	@Override
+	public String toStringName() {
+		return "Four";
+	}
 }
 

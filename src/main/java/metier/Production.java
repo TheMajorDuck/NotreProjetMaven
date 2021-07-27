@@ -31,6 +31,11 @@ public abstract class Production extends Batiment {
 	{		
 		return bati;
 	}
+	
+	@Override
+	public String toStringName() {
+		return "prod";
+	}
 
 
 }
