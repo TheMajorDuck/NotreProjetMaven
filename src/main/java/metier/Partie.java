@@ -108,14 +108,25 @@ public class Partie {
 	
 	public void startPartie(Partie p){
 		
-		partieEnCours=true;
+		partieEnCours=true;		
 		
 		while(partieEnCours){
-			for(Joueur joueur : joueurs){
-				joueur.joueTour(p);	// Pioche des ressources et affiche son menu de joueur
+			for(int i = 1;i<=nbrDeTour;i++)
+			{
+				for(int j=0;j<joueurs.size();j++)
+				{
+					Joueur j1 = joueurs.get(j);
+					System.out.println("\nDébut de tour de "+j1.getSurnom());
+					j1.setTourEnCours(true);
+					while(j1.getTourEnCours()==true)
+					{
+						j1.joueTour(p);
+					}
+					System.out.println("\nTour terminé pour "+j1.getSurnom());
+				}
+				
 			}
 		}
-		
 	}
 	
 	
