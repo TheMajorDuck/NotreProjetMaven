@@ -29,9 +29,9 @@ public class Fonderie  extends Transformation {
 		super(idCompte, idPartie,nom, level, def);
 	}
 	@Override
-	public void transformation (Ressource r1, int nb,  List <Ressource> re) // r1 -> la ressource que l'on veut obtenir
+	public void transformation (String r1, int nb,  List <Ressource> re) // r1 -> la ressource que l'on veut obtenir
 	{															// nb -> la quantité de charbon que l'on veut obtenir
-		if (r1 instanceof Charbon)								// j -> le joueur qui opère la transformation
+		if (r1.equalsIgnoreCase("Charbon"))								// j -> le joueur qui opère la transformation
 		{
 			for (Ressource r : re)
 			{
@@ -52,7 +52,7 @@ public class Fonderie  extends Transformation {
 				}
 			}
 		}
-		else if(r1 instanceof Gold || r1 instanceof Fer || r1 instanceof Cuivre)
+		else if(r1.equalsIgnoreCase("gold") || r1.equalsIgnoreCase("fer") || r1.equalsIgnoreCase("cuivre"))
 		{
 
 			for (Ressource r : re)
@@ -62,15 +62,15 @@ public class Fonderie  extends Transformation {
 					r.setStock(r.getStock()-nb);
 					for (Ressource r2 : re)
 					{
-						if (r2 instanceof Gold)
+						if (r2 instanceof Gold && r1.equalsIgnoreCase("gold"))
 						{
 							r2.setStock(nb+r2.getStock());
 						}
-						if (r2 instanceof Fer)
+						if (r2 instanceof Fer && r1.equalsIgnoreCase("fer"))
 						{
 							r2.setStock(nb+r2.getStock());
 						}
-						if (r2 instanceof Cuivre)
+						if (r2 instanceof Cuivre && r1.equalsIgnoreCase("cuivre"))
 						{
 							r2.setStock(nb+r2.getStock());
 						}

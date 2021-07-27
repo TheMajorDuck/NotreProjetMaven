@@ -150,7 +150,7 @@ public class Joueur extends Compte{
 				
 	}
 	
-	public void transformation(Transformation trans, Ressource r, int nb)
+	/*public void transformation(Transformation trans, Ressource r, int nb)
 	{
 		if (trans instanceof Four)
 		{
@@ -175,6 +175,33 @@ public class Joueur extends Compte{
 		else {
 			System.out.println("Ce batiment ne permet pas de transfomer des ressources");
 		}
+	}*/
+	
+	public void transformation(String batiment,int nbRessource,String nomRessource)
+	{
+
+		if (batiment.equals("Four"))
+		{
+			for (Batiment b: construction)
+			{
+				if (b instanceof Four)
+				{
+					((Four) b).transformation(nomRessource, nbRessource, this.stock);
+				}
+			}
+		}
+		else if(batiment.equals("Fonderie"))
+		{
+			for (Batiment b: construction)
+			{
+				if (b instanceof Fonderie)
+				{
+					((Fonderie) b).transformation(nomRessource, nbRessource, this.stock);
+				}
+			}
+		}
+		
+		
 	}
 	
 	public void constructBat(Batiment bat)  // Construction d'un batiment (ajout ï¿½ la liste/actuAtt/ActuDef/ActuRessources)
@@ -259,7 +286,8 @@ public class Joueur extends Compte{
 		System.out.printf("%s\n","1- Construire");
 		System.out.printf("%s\n","2- Ameliorer");
 		System.out.printf("%s\n","3- Attaquer");
-		System.out.printf("%s\n","4- Fin de tour");
+		System.out.printf("%s\n","4- Tranformer ressources");
+		System.out.printf("%s\n","5- Fin de tour");
 		
 		afficheListeRessources();
 		
@@ -272,13 +300,60 @@ public class Joueur extends Compte{
 			case 1 : menuConstruction(p); break;
 			case 2 : menuAmeliorer(p); break; // TODO: a finir en intï¿½grant la mï¿½thode pour upgrader le batiment
 			case 3 : menuAttaquer(p);break; // TODO: Menu attaque
-			case 4 : menuFinDeTour(p);break; // TODO: fin de tour
+			case 4 : menuTransformation(p);break; // TODO: Menu Transformatino
+			case 5 : menuFinDeTour(p);break; // TODO: fin de tour
 			default : System.out.println("Mauvaise valeur");
 		}
 		
 	}
 	
 	
+	private void menuTransformation(Partie p) {
+		boolean batimentTranformationOK=false;
+		String batiment;
+		int nbRessource=0;
+		String nomRessource ="null";
+		
+		System.out.println("Votre liste de batiment de transformation:");
+		
+		for (Batiment b : construction)
+		{
+			if(b instanceof Transformation)
+			{
+				System.out.println(b.toStringName());
+				batimentTranformationOK=true;
+			}
+		}
+		
+		if(batimentTranformationOK==false)
+		{
+			System.out.println("Vous n'avez pas de batiment de construction");
+			menuJoueur(p);
+		}
+		
+		batiment = saisieString("Quel batiment souhaitez-vous utiliser?");
+		if (batiment.equals("Four")) 
+		{
+			int i = stock.get(0).getStock();
+			if (i<=0) 
+			{
+				System.out.println("Le four ne peut pas être utiliser! Vous n'avez pas de bois!");
+			}
+			else 
+			{
+				nomRessource = "charbon";
+				nbRessource = saisieInt("Vous avez " + i + "bois, combien voulez-vous en transformer?");
+			}	
+		}
+		else if (batiment.equals("Fonderie"))
+		{
+			afficheListeRessources();
+			nbRessource = saisieInt("Combien de ressources voulez-vous transformer ?");
+			nomRessource = saisieString("Quels ressources voulez-vous produire (charbon/gold/fer/cuivre)?");
+		}
+		transformation(batiment,nbRessource,nomRessource);
+	}
+
 	public void menuAmeliorer(Partie p){
 		
 		System.out.printf("%s\n","MENU AMELIORATION" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
