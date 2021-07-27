@@ -55,6 +55,9 @@ public class Joueur extends Compte{
 	public Joueur (String login, String password, String prenom, String nom, String surnom)
 	{
 		super(login,password, TypeCompte.Joueur, prenom, nom, surnom);
+		Bastide bastide = new Bastide();
+		this.construction.add(bastide);
+		this.construction = actuDef();
 	}
 
 	public Joueur (String login, String password)
