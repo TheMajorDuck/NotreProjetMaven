@@ -17,6 +17,7 @@ public class Mine  extends Production {
 	public Mine() 
 	
 	{
+		setNom("mine");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 		setDef(20);
 	}

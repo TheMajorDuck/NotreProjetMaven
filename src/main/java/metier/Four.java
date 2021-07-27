@@ -16,6 +16,7 @@ public class Four  extends Transformation {
 	public Four() 
 	
 	{
+		setNom("four");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 		setDef(20);
 	}
@@ -30,9 +31,9 @@ public class Four  extends Transformation {
 	}
 	
 	@Override
-	public void transformation (Ressource r1, int nb, List <Ressource> re)  // r1 -> la ressource que l'on veut obtenir
+	public void transformation (String r1, int nb, List <Ressource> re)  // r1 -> la ressource que l'on veut obtenir
 	{																		// nb -> la quantité de charbon que l'on veut obtenir
-		if (r1 instanceof Charbon)											// re -> liste de ressource du joueur qui opère la transformation
+		if (r1.equalsIgnoreCase("charbon"))											// re -> liste de ressource du joueur qui opère la transformation
 		{
 			for (Ressource r : re)
 			{
