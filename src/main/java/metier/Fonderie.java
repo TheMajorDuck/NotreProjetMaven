@@ -81,6 +81,9 @@ public class Fonderie  extends Transformation {
 		}else {System.out.println("\n Ce batiment n'est pas une pierre philosophale !");}
 	}
 
-
+	@Override
+	public String toStringName() {
+		return "Fonderie";
+	}
 
 }

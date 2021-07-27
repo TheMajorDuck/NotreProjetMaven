@@ -43,5 +43,8 @@ public abstract class Ressource {
 		this.stock+= gain;
 	}
 	
+	public String toStringName() {
+		return "";
+	}
 
 }

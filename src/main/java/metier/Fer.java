@@ -40,7 +40,10 @@ public class Fer extends Ressource{
 		super.actuGain(gain);
 	}
 
-	
+	@Override
+	public String toStringName() {
+		return "Fer";
+	}
 	
 
 }
