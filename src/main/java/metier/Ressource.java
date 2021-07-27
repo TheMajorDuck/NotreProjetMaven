@@ -33,7 +33,7 @@ public abstract class Ressource {
 		{
 			if (r.getClass()==this.getClass()) 
 			{
-				this.stock-=r.stock;
+				this.setStock(this.stock-r.stock);
 			}
 		}
 	}

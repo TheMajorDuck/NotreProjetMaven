@@ -17,6 +17,7 @@ public class Fonderie  extends Transformation {
 	
 	{
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(20);
 	}
 
 	public Fonderie(String nom, int level, double def){

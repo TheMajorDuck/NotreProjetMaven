@@ -12,13 +12,14 @@ public class Muraille  extends Defense{
 	protected Fer f = new Fer(3);
 	protected Cuivre cu = new Cuivre(0);
 	
-	private double def = 100;
+	private double def;
 	
 	
 	public Muraille() 
 	
 	{
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(100);
 	}
 
 	public Muraille(String nom, int level, int def){
