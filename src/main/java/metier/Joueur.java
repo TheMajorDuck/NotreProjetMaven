@@ -507,7 +507,7 @@ public class Joueur extends Compte{
 		{
 			if(b instanceof Attaque)
 			{
-				if (((Attaque)b).isUsed())
+				if (((Attaque)b).isUsed()==false)
 					{
 					cpt++;
 					}
@@ -684,9 +684,11 @@ public class Joueur extends Compte{
 	public void menuAttaquer(Partie p)
 	{
 		//Vérifie si un batiment d'attaque disponible pour attaquer existe
+		
+		
 		if(this.getBatimentAttaque())
 		{
-		
+			
 			for (Joueur j: p.getJoueurs())
 			{
 				if (j.surnom!=this.surnom)
@@ -703,10 +705,10 @@ public class Joueur extends Compte{
 			switch(choix) 
 			{
 				case 0: menuJoueur(p) ;break;
-				case 1: double valeurAttaque = choixBatimentAttaque();menuAttaqueJoueur(p,valeurAttaque);break;
-				default : System.out.println("Mauvaise valeur");
+				case 1: double valeurAttaque = choixBatimentAttaque();menuAttaqueJoueur(p,valeurAttaque);menuAttaquer(p);break;
+				default : System.out.println("Mauvaise valeur");menuAttaquer(p);
 			}
-			menuAttaquer(p);
+			
 		}
 		else
 		{
