@@ -17,11 +17,11 @@ public class Joueur extends Compte{
 	private Gold g = new Gold(0);
 	private Fer f = new Fer(0);
 	private Cuivre cu = new Cuivre(0);
-	protected List <Ressource> stock= new ArrayList <Ressource>();
-	protected List <Batiment> construction= new ArrayList <Batiment>();
+	protected List<Ressource> stock = new ArrayList <Ressource>();
+	protected List<Batiment> construction = new ArrayList <Batiment>();
 	
-	private int def=0;
-	private int att=0;
+	private int def = 0;
+	private int att = 0;
 	private boolean tourEnCours;
 
 	public static int saisieInt(String msg) 
@@ -44,12 +44,12 @@ public class Joueur extends Compte{
 		stock.add(b);stock.add(p);stock.add(m);stock.add(c);stock.add(g);stock.add(f);stock.add(cu);
 		Bastide bastide = new Bastide();
 		this.construction.add(bastide);
-		this.construction=actuDef();
+		this.construction = actuDef();
 	}
 	
 	public Joueur (int id, String login, String password)
 	{
-		super(id, login,password);
+		super(id, login, password);
 	}
 	
 	public Joueur (String login, String password, String prenom, String nom, String surnom)
@@ -59,7 +59,7 @@ public class Joueur extends Compte{
 
 	public Joueur (String login, String password)
 	{
-		super(login,password);
+		super(login, password);
 	}
 	
 	
@@ -188,13 +188,17 @@ public class Joueur extends Compte{
 	
 	public void constructBat(Batiment bat)  // Construction d'un batiment (ajout � la liste/actuAtt/ActuDef/ActuRessources)
 	{
-		this.construction.add(bat);
-		this.construction = actuDef();
-		this.construction = actuAtt();
-		for (Ressource r : this.stock)	//modification du stock de ressources du joueur en fonction du cout (cf. methode actuAchat de la classe ressources)
-		{
-			r.actuAchat(bat.getCost());
-		}
+		List<Batiment> tmp_constructions = getConstruction();
+		tmp_constructions.add(bat);
+		setConstruction(tmp_constructions);	
+		
+		setConstruction(actuDef());
+//		this.construction = actuDef();
+//		this.construction = actuAtt();
+//		for (Ressource r : this.stock)	//modification du stock de ressources du joueur en fonction du cout (cf. methode actuAchat de la classe ressources)
+//		{
+//			r.actuAchat(bat.getCost());
+//		}
 	}
 	
 	public ArrayList <Batiment> actuAtt()  //Permet d'actualiser les point d'attaque du joueur ainsi que la liste des batiments du joueur (ATTENTION RENVOI UNE LISTE !!)
