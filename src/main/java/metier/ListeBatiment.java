@@ -2,6 +2,6 @@ package metier;
 
 public enum ListeBatiment {
 	
-	Scierie,Muraille,Mine,Merveille,Four,Forteresse,Fonderie,Catapulte;
+	Scierie,Muraille,Mine,Carriere,Merveille,Four,Forteresse,Fonderie,Catapulte;
 	
 }

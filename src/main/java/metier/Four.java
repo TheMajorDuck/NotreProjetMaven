@@ -32,7 +32,7 @@ public class Four  extends Transformation {
 	@Override
 	public void transformation (Ressource r1, int nb, List <Ressource> re)  // r1 -> la ressource que l'on veut obtenir
 	{																		// nb -> la quantité de charbon que l'on veut obtenir
-		if (r1 instanceof Charbon)											// j -> le joueur qui opère la transformation
+		if (r1 instanceof Charbon)											// re -> liste de ressource du joueur qui opère la transformation
 		{
 			for (Ressource r : re)
 			{
