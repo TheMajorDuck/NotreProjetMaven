@@ -28,7 +28,7 @@ public abstract class Transformation extends Batiment{
 		super(idCompte, idPartie,nom, level, def);
 	}
 	
-	public void transformation (Ressource r1, int nb, List <Ressource> re)
+	public void transformation (String r1, int nb, List <Ressource> re)
 	{
 	
 	}
