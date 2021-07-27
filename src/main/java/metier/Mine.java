@@ -12,12 +12,13 @@ public class Mine  extends Production {
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
 	
-	private double def = 20;
+	private double def;
 	
 	public Mine() 
 	
 	{
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(20);
 	}
 
 	public Mine(String nom, int level, double def){

@@ -12,13 +12,15 @@ public class Catapulte extends Attaque {
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
 	
-	protected double att=20;
-	protected double def=20;
+	protected double att;
+	protected double def;
 	
 	public Catapulte() 
 	
 	{
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
+		setDef(20);
+		setAtt(20);
 	}
 
 	public Catapulte(String nom, int level, double def){
