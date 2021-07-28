@@ -210,11 +210,12 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("UPDATE batiment SET nom=?, niveau=?, pts_de_defense=? WHERE id=?");
+			PreparedStatement ps = conn.prepareStatement("UPDATE batiment SET nom=?, niveau=?, pts_de_defense=?, pts_d_attaque=? WHERE id=?");
 			ps.setString(1,b.toStringName().toLowerCase());
 			ps.setInt(2,b.getLevel());
 			ps.setDouble(3,b.getDef());
-			ps.setInt(4,b.getId());
+			ps.setDouble(4, b.getAtt());
+			ps.setInt(5,b.getId());
 			
 			ps.executeUpdate();
 			
