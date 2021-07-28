@@ -6,10 +6,10 @@ import java.util.List;
 public class Catapulte extends Attaque {
 	protected Bois b = new Bois(3);
 	protected Pierre p = new Pierre(0);
-	protected Minerais m = new Minerais(3);
+	protected Minerais m = new Minerais(0);
 	protected Charbon c = new Charbon(0);
 	protected Gold g = new Gold(3);
-	protected Fer f = new Fer(0);
+	protected Fer f = new Fer(3);
 	protected Cuivre cu = new Cuivre(0);
 	
 	protected double att;
@@ -29,9 +29,10 @@ public class Catapulte extends Attaque {
 		super(nom, level, def);
 	}
 	
-	public Catapulte(int id,int idCompte, int idPartie,String nom, int level, double def)
+	public Catapulte(int id,int idCompte, int idPartie,String nom, int level, double def, double att)
 	{
-		super(id,idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def, att);
+		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 
 	public Bois getB() {

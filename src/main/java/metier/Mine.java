@@ -29,6 +29,7 @@ public class Mine  extends Production {
 	public Mine(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
 		super(id,idCompte, idPartie,nom, level, def);
+		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 
 	public void upgrade() 

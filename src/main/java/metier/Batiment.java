@@ -34,6 +34,17 @@ public abstract class Batiment {
 		this.def = def;
 	}
 	
+	public Batiment(int id, int idCompte, int idPartie,String nom, int level, double def,double att)
+	{
+		this.id = id;
+		this.idCompte = idCompte;
+		this.idPartie = idPartie;
+		this.nom = nom;
+		this.level = level;
+		this.def = def;
+		this.att = att;
+	}
+	
 	public Batiment(int id, int idCompte, int idPartie,String nom, int level, double def)
 	{
 		this.id = id;

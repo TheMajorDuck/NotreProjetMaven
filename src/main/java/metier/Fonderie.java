@@ -28,6 +28,7 @@ public class Fonderie  extends Transformation {
 	public Fonderie(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
 		super(id,idCompte, idPartie,nom, level, def);
+		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
 	@Override
 	public void transformation (String r1, int nb,  List <Ressource> re) // r1 -> la ressource que l'on veut obtenir

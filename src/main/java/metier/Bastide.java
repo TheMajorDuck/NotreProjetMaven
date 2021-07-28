@@ -1,9 +1,11 @@
 package metier;
 
 public class Bastide extends Defense {
-
+	
 	public Bastide(){
-		super("bastide", 1, 50);
+		setNom("bastide");
+		setLevel(1);
+		setDef(50);
 	}
 	
 	public Bastide(String nom, int level, double def)
@@ -15,6 +17,7 @@ public class Bastide extends Defense {
 	{
 		super(id,idCompte, idPartie,nom, level, def);
 	}
+	
 	@Override
 	public String toStringName() {
 		return "Bastide";
