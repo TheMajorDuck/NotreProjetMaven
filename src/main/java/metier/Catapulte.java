@@ -28,9 +28,9 @@ public class Catapulte extends Attaque {
 		super(nom, level, def);
 	}
 	
-	public Catapulte(int idCompte, int idPartie,String nom, int level, double def)
+	public Catapulte(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 
 	public Bois getB() {

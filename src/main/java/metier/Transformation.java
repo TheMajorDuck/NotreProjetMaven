@@ -23,9 +23,9 @@ public abstract class Transformation extends Batiment{
 		super(nom, level, def);
 	}
 	
-	public Transformation(int idCompte, int idPartie,String nom, int level, double def)
+	public Transformation(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	public void transformation (String r1, int nb, List <Ressource> re)

@@ -29,6 +29,11 @@ public class Muraille  extends Defense{
 		
 	}
 	
+	public Muraille(int id,int idCompte, int idPartie,String nom, int level, double def)
+	{
+		super(id,idCompte, idPartie,nom, level, def);
+	}
+	
 	public void upgrade() 
 	{	
 		List<Ressource> tmpCost= new ArrayList<Ressource>();

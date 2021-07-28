@@ -28,9 +28,9 @@ public class Merveille  extends Batiment{
 		super(nom, level, def);
 	}
 	
-	public Merveille(int idCompte, int idPartie,String nom, int level, double def)
+	public Merveille(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	public void upgrade() 

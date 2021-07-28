@@ -151,10 +151,10 @@ public class Test {
 		
 		connected.toString();
 		
-		Partie nouvPartie = new Partie(0,nbTour);
+		Partie nouvPartie = new Partie();
 		Partie p = daoPartie.insert(nouvPartie);
-		daoCompte.ajoutJoueur(p.getId(),connected.getId());
 		p.initPartie(nbJoueur, connected,p);
+		daoCompte.ajoutJoueur(p.getId(),connected.getId());
 		
 		menuPartie(p);
 		return p;

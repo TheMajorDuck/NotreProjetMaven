@@ -21,9 +21,9 @@ public abstract class Defense extends Batiment {
 		super(nom, level, def);
 	}
 	
-	public Defense(int idCompte, int idPartie,String nom, int level, double def)
+	public Defense(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	public void upgrade() 

@@ -25,9 +25,9 @@ public class Fonderie  extends Transformation {
 		super(nom, level, def);
 	}
 
-	public Fonderie(int idCompte, int idPartie,String nom, int level, double def)
+	public Fonderie(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	@Override
 	public void transformation (String r1, int nb,  List <Ressource> re) // r1 -> la ressource que l'on veut obtenir
