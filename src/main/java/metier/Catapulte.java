@@ -18,6 +18,7 @@ public class Catapulte extends Attaque {
 	public Catapulte() 
 	
 	{
+		super();
 		setNom("catapulte");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 		setDef(20);
@@ -87,6 +88,14 @@ public class Catapulte extends Attaque {
 
 	public void setCu(Cuivre cu) {
 		this.cu = cu;
+	}
+	
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------------------

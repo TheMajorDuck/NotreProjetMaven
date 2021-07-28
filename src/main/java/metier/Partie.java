@@ -86,7 +86,7 @@ public class Partie {
 				System.out.println("\nJoueur "+(i+1)+" : ");
 				String compteCree = saisieString("Ce joueur a-t-il déjà un compte ? (y/n)");
 				
-				if(compteCree.equals("y"))
+				if(compteCree.equalsIgnoreCase("y"))
 				{
 					String surnomJ = saisieString("Veuillez indiquer le surnom du joueur :");
 					Compte j = daoCompte.findBySurnom(surnomJ);
