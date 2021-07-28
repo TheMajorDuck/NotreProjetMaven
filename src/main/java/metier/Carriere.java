@@ -26,9 +26,9 @@ public class Carriere extends Production {
 		super(nom, level, def);
 	}
 	
-	public Carriere(int idCompte, int idPartie,String nom, int level, double def)
+	public Carriere(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	

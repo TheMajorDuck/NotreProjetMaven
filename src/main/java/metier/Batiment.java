@@ -12,6 +12,7 @@ public abstract class Batiment {
 	protected int level=1;
 	protected int idCompte;
 	protected int idPartie;
+	protected int id;
 	
 	protected Bois b = new Bois(0);
 	protected Pierre p = new Pierre(0);
@@ -33,8 +34,9 @@ public abstract class Batiment {
 		this.def = def;
 	}
 	
-	public Batiment(int idCompte, int idPartie,String nom, int level, double def)
+	public Batiment(int id, int idCompte, int idPartie,String nom, int level, double def)
 	{
+		this.id = id;
 		this.idCompte = idCompte;
 		this.idPartie = idPartie;
 		this.nom = nom;
@@ -59,6 +61,14 @@ public abstract class Batiment {
 
 	public void setDef(double d) {
 		this.def = d;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public double getAtt() {

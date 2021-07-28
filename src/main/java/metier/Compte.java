@@ -105,5 +105,11 @@ public abstract class Compte {
 	public void setSurnom(String surnom) {
 		this.surnom = surnom;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Compte [id=" + id + ", login=" + login + ", password=" + password + ", typeCompte=" + typeCompte
+				+ ", prenom=" + prenom + ", nom=" + nom + ", surnom=" + surnom + "]";
+	}
+
 }

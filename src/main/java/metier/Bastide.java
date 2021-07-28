@@ -11,9 +11,9 @@ public class Bastide extends Defense {
 		super(nom, level, def);
 	}
 	
-	public Bastide(int idCompte, int idPartie,String nom, int level, double def)
+	public Bastide(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	@Override
 	public String toStringName() {

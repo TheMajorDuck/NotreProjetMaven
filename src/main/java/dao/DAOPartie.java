@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.List;
+
+import com.mysql.jdbc.Statement;
+
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,20 +100,28 @@ public class DAOPartie implements IDAO<Partie,Integer>{
 
 	@Override
 	public Partie insert(Partie p) {
+		Partie partie = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO partie (id, nbr_de_tour) VALUES (?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO partie (id, nbr_de_tour) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
 
 			ps.setInt(1, p.getId());
 			ps.setInt(2, p.getNbrDeTour());
 			ps.executeUpdate();
-
+			ResultSet generatedKeys = ps.getGeneratedKeys();
+		
+			while(generatedKeys.next())
+			{
+				partie = new Partie(generatedKeys.getInt(1),p.getNbrDeTour(),p.getJoueurs());
+			}
+			
+			generatedKeys.close();
 			ps.close();
 			conn.close();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		return p;
+		return partie;
 	
 	}
 

@@ -29,9 +29,9 @@ public class Scierie extends Production{
 		
 	}
 	
-	public Scierie(int idCompte, int idPartie,String nom, int level, double def)
+	public Scierie(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	public void upgrade() 
