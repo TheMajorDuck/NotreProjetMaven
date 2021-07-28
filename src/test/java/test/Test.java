@@ -89,7 +89,7 @@ public class Test {
 			String password = saisieString("\nSaisissez votre mot de passe : ");
 			String prenom = saisieString("\nVeuillez indiquez votre prenom : ");
 			String nom = saisieString("\nVeuillez indiquez votre nom : ");
-			String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez ï¿½tre reconnu durant la partie : ");
+			String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez être reconnu durant la partie : ");
 			Joueur j = new Joueur(login, password, prenom, nom, surnom);
 			daoCompte.insert(j);
 			
@@ -162,7 +162,7 @@ public class Test {
 	
 	public static void menuPartie(Partie p)
 	{
-		System.out.println("\nVous avez demarre une nouvelle partie de 'Notre Projet' ! ");
+		System.out.println("\nVous avez demarre une nouvelle partie de 'Notre Projet' !\n ");
 		System.out.println("Etes-vous pret a vous entretuer ?");
 		System.out.println("1- Oui je vais tous vous demonter !! ");
 		System.out.println("2- Laisse-moi quelques minutes stp");

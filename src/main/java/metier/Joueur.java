@@ -284,7 +284,7 @@ public class Joueur extends Compte{
 			else if (b instanceof Scierie)
 			{
 				bois+=3;
-				System.out.println("\nVotre scierie vous a rapport� 3 bois suppl�mentaires ("+bois+" bois au total !)\n");	
+				System.out.println("\nVotre scierie vous a rapporte3 bois supplementaires ("+bois+" bois au total !)\n");	
 			}
 		}
 		b.actuGain(bois);
@@ -294,43 +294,39 @@ public class Joueur extends Compte{
 	
 	public void menuJoueur(Partie p){
 		
-		System.out.printf("%s\n","MENU JOUEUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
-		System.out.printf("%s\n","1- Construire");
-		System.out.printf("%s\n","2- Ameliorer");
-		System.out.printf("%s\n","3- Attaquer");
-		System.out.printf("%s\n","4- Tranformer ressources");
-		System.out.printf("%s\n","5- Fin de tour");
-		
-		if(aCommence = false)
+		if(this.getDef()>0)
 		{
-			System.out.println("Vous allez creer une bastide");
-			aCommence = true;
-			Bastide bastide = new Bastide();
-			this.getConstruction().add(bastide);
-			this.setConstruction(actuDef());
-			daoBatiment.insert(bastide);
+			System.out.printf("%s\n","MENU JOUEUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
+			System.out.printf("%s\n","1- Construire");
+			System.out.printf("%s\n","2- Ameliorer");
+			System.out.printf("%s\n","3- Attaquer");
+			System.out.printf("%s\n","4- Tranformer ressources");
+			System.out.printf("%s\n","5- Fin de tour");
+			
+			int choix =10;
+			afficheListeRessources();
+			try {
+				choix = saisieInt("Choisir un menu");
+			}
+			catch (Exception e) {
+				System.out.println("Rentrez un chiffre !");
+			}
+			
+			switch(choix) 
+			{
+				case 1 : menuConstruction(p); break;
+				case 2 : menuAmeliorer(p); break; // TODO: a finir en int�grant la m�thode pour upgrader le batiment
+				case 3 : menuAttaquer(p);break; // TODO: Menu attaque
+				case 4 : menuTransformation(p);break; // TODO: Menu Transformatino
+				case 5 : menuFinDeTour(p);break; // TODO: fin de tour
+				default : System.out.println("Mauvaise valeur");
+			}
 		}
-		
-		int choix =10;
-		afficheListeRessources();
-		try {
-			choix = saisieInt("Choisir un menu");
-		}
-		catch (Exception e) {
-			System.out.println("Rentrez un chiffre !");
-		}
-		
-		switch(choix) 
+		else
 		{
-			case 1 : menuConstruction(p); break;
-			case 2 : menuAmeliorer(p); break; // TODO: a finir en int�grant la m�thode pour upgrader le batiment
-			case 3 : menuAttaquer(p);break; // TODO: Menu attaque
-			case 4 : menuTransformation(p);break; // TODO: Menu Transformatino
-			case 5 : menuFinDeTour(p);break; // TODO: fin de tour
-			default : System.out.println("Mauvaise valeur");
+			System.out.printf("%s\n","JOUEUR ELIMINE" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
+			menuFinDeTour(p);
 		}
-		
-		
 		
 	}
 	

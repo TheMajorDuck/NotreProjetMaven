@@ -21,7 +21,7 @@ public class Catapulte extends Attaque {
 		super();
 		setNom("catapulte");
 		cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
-		setDef(20);
+		setDef(25);
 		setAtt(20);
 	}
 
@@ -111,7 +111,7 @@ public class Catapulte extends Attaque {
 				r.setStock(r.getStock()+3);
 			}
 		}
-		this.setAtt(this.getAtt()+0);
+		this.setAtt(this.getAtt()*2.5);
 		this.setDef(this.getDef()+20);
 		this.setCost(tmpCost);
 		this.setLevel(this.getLevel()+1);
