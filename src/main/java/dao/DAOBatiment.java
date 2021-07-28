@@ -158,12 +158,13 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO batiment (id_compte, id_partie,nom, niveau, pts_de_defense) VALUES (?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO batiment (id_compte, id_partie,nom, niveau, pts_de_defense, pts_d_attaque) VALUES (?,?,?,?,?,?)");
 			ps.setInt(1,idCompte);
 			ps.setInt(2,idPartie);
 			ps.setString(3,b.getNom());
 			ps.setInt(4,b.getLevel());
 			ps.setDouble(5,b.getDef());
+			ps.setDouble(6,b.getAtt());
 			
 			ps.executeUpdate();
 			
@@ -177,7 +178,7 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 				{
 					case "Bastide" : batiment = new Bastide(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
 					case "Carriere" : batiment = new Carriere(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
-					case "Catapulte" : batiment = new Catapulte(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Catapulte" : batiment = new Catapulte(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef(),b.getAtt());break;
 					case "Fonderie" : batiment = new Fonderie(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
 					case "Forteresse" : batiment = new Forteresse(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
 					case "Four" : batiment = new Four(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
@@ -210,7 +211,7 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
 			PreparedStatement ps = conn.prepareStatement("UPDATE batiment SET nom=?, niveau=?, pts_de_defense=? WHERE id=?");
-			ps.setString(1,b.toStringName());
+			ps.setString(1,b.toStringName().toLowerCase());
 			ps.setInt(2,b.getLevel());
 			ps.setDouble(3,b.getDef());
 			ps.setInt(4,b.getId());

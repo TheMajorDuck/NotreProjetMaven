@@ -92,11 +92,14 @@ public class Partie {
 					daoRessource.ajoutRessource(connected.getId(), p.getId(), r);
 				}
 				
+				/*
 				for(Batiment b : ((Joueur) connected).getConstruction())
 				{
-					daoBatiment.ajoutBatiment(connected.getId(), p.getId(), b);
+					System.out.println(b.getId());
+					b=daoBatiment.ajoutBatiment(connected.getId(), p.getId(), b);
+					System.out.println(b.getId());
 				}
-				
+				*/
 			}	
 			else
 			{
@@ -118,10 +121,12 @@ public class Partie {
 						daoRessource.ajoutRessource(j.getId(), p.getId(), r);
 					}
 					
+					/*
 					for(Batiment b : ((Joueur) j).getConstruction())
 					{
-						daoBatiment.ajoutBatiment(j.getId(), p.getId(), b);
-					}
+						b=daoBatiment.ajoutBatiment(j.getId(), p.getId(), b);
+						
+					}*/
 				}
 				else
 				{
@@ -133,22 +138,22 @@ public class Partie {
 					Joueur j = new Joueur(login, password, prenom, nom, surnom);
 					
 					Compte joueur = daoCompte.insert(j);
-					System.out.println(joueur.toString());
 					daoCompte.ajoutJoueur(p.getId(),joueur.getId());
 										
 					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
-					joueurs.add((Joueur)j);
+					joueurs.add((Joueur)joueur);
 					
 					for(Ressource r : ((Joueur) joueur).getStock())
 					{
 						daoRessource.ajoutRessource(joueur.getId(), p.getId(), r);
 					}
 					
-					for(Batiment b : ((Joueur) joueur).getConstruction())
+					
+					/*for(Batiment b : ((Joueur) joueur).getConstruction())
 					{
-						daoBatiment.ajoutBatiment(joueur.getId(), p.getId(), b);
-					}
+						b=daoBatiment.ajoutBatiment(joueur.getId(), p.getId(), b);
+					}*/
 				}
 				
 			}
@@ -159,13 +164,20 @@ public class Partie {
 	}
 	
 	public void startPartie(Partie p){
-		
+
 		p.partieEnCours=true;
 		Joueur vainqueur = null;
-		
+
 		while(p.partieEnCours){
 			for(int i = 1;i<=nbrDeTour;i++)
 			{
+				if(i==1)
+				{
+					for(Joueur init : joueurs)
+					{
+						init.construitBastide(init.getId(),p.getId());
+					}
+				}
 				for(int j=0;j<joueurs.size();j++)
 				{
 					Joueur j1 = joueurs.get(j);
@@ -176,11 +188,13 @@ public class Partie {
 					{
 						j1.joueTour(p);
 					}
-					finDePartie(p);savePartie(p);
+					finDePartie(p);/*savePartie(p);*/
+
 					if(p.partieEnCours==false)
 					{
 						vainqueur = finDePartie(p);
 						break;
+
 					}
 				}
 				if(p.partieEnCours==false)
@@ -198,7 +212,7 @@ public class Partie {
 			menuFinDePartie(p,vainqueur);
 		}
 	}
-	
+
 
 	public Joueur finDePartie(Partie p)
 	{
@@ -206,18 +220,18 @@ public class Partie {
 		for(Joueur joueur : joueurs)
 		{
 			int somme = 0;
-			
+
 			for(int i=0;i<joueurs.size();i++)
 			{
 				somme+=(joueurs.get(i)).getDef();
 			}
-			
+
 			if(somme-joueur.getDef()==0)
 			{
 				p.partieEnCours=false;
 				vainqueur = joueur;
 			}
-			
+
 			else 
 			{
 				for(Batiment b : joueur.getConstruction())
@@ -272,7 +286,7 @@ public class Partie {
         }
 	}
 
-	public void savePartie(Partie p)
+	/*public void savePartie(Partie p)
 	{
 		for(Joueur j : joueurs)
 		{
@@ -295,5 +309,5 @@ public class Partie {
 	{
 		
 	}
-	
+	*/
 }

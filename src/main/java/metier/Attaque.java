@@ -12,7 +12,6 @@ public abstract class Attaque extends Batiment{
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
 	
-	
 	public Attaque(){
 	}
 	
@@ -20,9 +19,9 @@ public abstract class Attaque extends Batiment{
 		super(nom, level, def);
 	}
 	
-	public Attaque(int id,int idCompte, int idPartie,String nom, int level, double def)
+	public Attaque(int id,int idCompte, int idPartie,String nom, int level, double def, double att)
 	{
-		super(id,idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def,att);
 	}
 
 	public boolean isUsed() {

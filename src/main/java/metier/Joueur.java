@@ -18,6 +18,7 @@ public class Joueur extends Compte{
 	private Fer f = new Fer(0);
 	private Cuivre cu = new Cuivre(0);
 	protected List<Ressource> stock = new ArrayList <Ressource>();
+	
 	protected List<Batiment> construction = new ArrayList <Batiment>();
 	
 	private int def = 0;
@@ -27,6 +28,8 @@ public class Joueur extends Compte{
 	static DAOBatiment daoBatiment = new DAOBatiment();
 	static DAOPartie daoPartie = new DAOPartie();
 	static DAORessource daoRessource = new DAORessource();
+	
+	protected boolean aCommence = false;
 
 	public static int saisieInt(String msg) 
 		{
@@ -46,29 +49,40 @@ public class Joueur extends Compte{
 	{
 		super(id,login,password, TypeCompte.Joueur,prenom, nom, surnom);
 		stock.add(b);stock.add(p);stock.add(m);stock.add(c);stock.add(g);stock.add(f);stock.add(cu);
-		Bastide bastide = new Bastide();
-		this.construction.add(bastide);
-		this.construction = actuDef();
+		//Bastide bastide = new Bastide();
+		//this.construction.add(bastide);
+		//this.construction = actuDef();
+		//aCommence = false;
 	}
 	
 	public Joueur (int id, String login, String password)
 	{
 		super(id, login, password);
+		aCommence = false;
 	}
 	
 	public Joueur (String login, String password, String prenom, String nom, String surnom)
 	{
 		super(login,password, TypeCompte.Joueur, prenom, nom, surnom);
-		Bastide bastide = new Bastide();
-		this.construction.add(bastide);
-		this.construction = actuDef();
+		//Bastide bastide = new Bastide();
+		//this.construction.add(bastide);
+		//this.construction = actuDef();
+		//aCommence = false;
 	}
 
 	public Joueur (String login, String password)
 	{
 		super(login, password);
+		aCommence = false;
 	}
 	
+	public void construitBastide(int idCompte,int idPartie)
+	{
+		Bastide bastide = new Bastide();
+		bastide = (Bastide) daoBatiment.ajoutBatiment(idCompte,idPartie,bastide);
+		this.construction.add(bastide);
+		this.construction = actuDef();
+	}
 	
 	public List<Ressource> getStock() {
 		return stock;
@@ -139,6 +153,8 @@ public class Joueur extends Compte{
 		bat.setDef(bat.getDef()-valeurAttaque);
 		System.out.println("Il reste "+bat.getDef()+" de defence a" + bat.toStringName());
 		enemi.setConstruction(enemi.actuDef());
+		daoBatiment.update(bat);
+		
 	}
 
 	public void attaque (Joueur enemi, Attaque at, Batiment de) //Attaque d'un batiment d'un autre joueur par un batiment d'attaque
@@ -285,6 +301,15 @@ public class Joueur extends Compte{
 		System.out.printf("%s\n","4- Tranformer ressources");
 		System.out.printf("%s\n","5- Fin de tour");
 		
+		if(aCommence = false)
+		{
+			System.out.println("Vous allez creer une bastide");
+			aCommence = true;
+			Bastide bastide = new Bastide();
+			this.getConstruction().add(bastide);
+			this.setConstruction(actuDef());
+			daoBatiment.insert(bastide);
+		}
 		
 		int choix =10;
 		afficheListeRessources();
@@ -377,7 +402,6 @@ public class Joueur extends Compte{
 				//this.construction.set(choix-1, newBatiment);
 				
 				if(verification(batiment)) {
-					
 					for (Ressource r : this.stock)	//modification du stock de ressources du joueur en fonction du cout (cf. methode actuAchat de la classe ressources)
 					{
 						r.actuAchat(batiment.getCost());
@@ -809,12 +833,12 @@ public class Joueur extends Compte{
 			if(i<=degatReste) 
 			{
 				attaque(e, b, degatBatiment+1);
-				daoBatiment.update(b);
+				
 			}
 			else 
 			{
 				attaque(e, b, degatBatiment);
-				daoBatiment.update(b);
+				
 			}
 		}
 		menuAttaquer(p);
