@@ -136,7 +136,7 @@ public class Joueur extends Compte{
 	public void attaque (Joueur enemi, Batiment bat, double valeurAttaque) // Attaque d'un batiment d'un autre joueur
 	{
 		bat.setDef(bat.getDef()-valeurAttaque);
-		
+		System.out.println("Il reste "+bat.getDef()+" de defence a" + bat.toStringName());
 		enemi.setConstruction(enemi.actuDef());
 	}
 
@@ -152,38 +152,11 @@ public class Joueur extends Compte{
 		}else {System.out.println("Ce batiment d'attaque est indisponible");}
 				
 	}
-	
-	/*public void transformation(Transformation trans, Ressource r, int nb)
-	{
-		if (trans instanceof Four)
-		{
-			for (Batiment b: construction)
-			{
-				if (b instanceof Four)
-				{
-					((Four) b).transformation(r, nb, this.stock);
-				}
-			}
-		}
-		else if(trans instanceof Fonderie)
-		{
-			for (Batiment b: construction)
-			{
-				if (b instanceof Fonderie)
-				{
-					((Fonderie) b).transformation(r, nb, this.stock);
-				}
-			}
-		}
-		else {
-			System.out.println("Ce batiment ne permet pas de transfomer des ressources");
-		}
-	}*/
-	
+		
 	public void transformation(String batiment,int nbRessource,String nomRessource)
 	{
 
-		if (batiment.equals("Four"))
+		if (batiment.equalsIgnoreCase("Four"))
 		{
 			for (Batiment b: construction)
 			{
@@ -193,7 +166,7 @@ public class Joueur extends Compte{
 				}
 			}
 		}
-		else if(batiment.equals("Fonderie"))
+		else if(batiment.equalsIgnoreCase("Fonderie"))
 		{
 			for (Batiment b: construction)
 			{
@@ -311,11 +284,15 @@ public class Joueur extends Compte{
 		System.out.printf("%s\n","4- Tranformer ressources");
 		System.out.printf("%s\n","5- Fin de tour");
 		
+		
+		int choix =10;
 		afficheListeRessources();
-		
-		int choix = saisieInt("Choisir un menu");
-		
-		
+		try {
+			choix = saisieInt("Choisir un menu");
+		}
+		catch (Exception e) {
+			System.out.println("Rentrez un chiffre !");
+		}
 		
 		switch(choix) 
 		{
@@ -326,6 +303,8 @@ public class Joueur extends Compte{
 			case 5 : menuFinDeTour(p);break; // TODO: fin de tour
 			default : System.out.println("Mauvaise valeur");
 		}
+		
+		
 		
 	}
 	
@@ -354,12 +333,12 @@ public class Joueur extends Compte{
 		}
 		
 		batiment = saisieString("Quel batiment souhaitez-vous utiliser?");
-		if (batiment.equals("Four")) 
+		if (batiment.equalsIgnoreCase("Four")) 
 		{
 			int i = stock.get(0).getStock();
 			if (i<=0) 
 			{
-				System.out.println("Le four ne peut pas �tre utiliser! Vous n'avez pas de bois!");
+				System.out.println("Le four ne peut pas etre utiliser! Vous n'avez pas de bois!");
 			}
 			else 
 			{
@@ -367,7 +346,7 @@ public class Joueur extends Compte{
 				nbRessource = saisieInt("Vous avez " + i + "bois, combien voulez-vous en transformer?");
 			}	
 		}
-		else if (batiment.equals("Fonderie"))
+		else if (batiment.equalsIgnoreCase("Fonderie"))
 		{
 			afficheListeRessources();
 			nbRessource = saisieInt("Combien de ressources voulez-vous transformer ?");
@@ -534,25 +513,19 @@ public class Joueur extends Compte{
 	}
 
 	public boolean getBatimentAttaque()
-	{
-		int cpt=0;
-		
+	{		
 		for(Batiment b : construction)
 		{
 			if(b instanceof Attaque)
 			{
 				if (((Attaque)b).isUsed()==false)
 					{
-					cpt++;
+					return true;
 					}
 			}
-			else{}
 		}
-
-		if(cpt>0)
-		{return true;}
-		else 
-		{return false;}
+		return false;
+	
 	}
 	
 	public double choixBatimentAttaque()
@@ -573,11 +546,11 @@ public class Joueur extends Compte{
 				listeLigne.add(cptLigne);
 				if(((Attaque) b).isUsed())
 				{
-					System.out.println("Batiment n�" +cptBatAttaque+ ": " + b + " / Batiment d'attaque d�j� utilis�");
+					System.out.println("Batiment numero " +cptBatAttaque+ ": " + b + " / Batiment d'attaque deja utilise");
 				}
 				else 
 				{
-					System.out.println("Batiment n�" +cptBatAttaque+ ": " + b + " / Batiment d'attaque disponible");
+					System.out.println("Batiment numero " +cptBatAttaque+ ": " + b + " / Batiment d'attaque disponible");
 				}
 			}
 		}
@@ -599,10 +572,15 @@ public class Joueur extends Compte{
 		double valeurAttaque = 0;
 		for (Batiment b : construction)
 		{
-			if(b instanceof Attaque || (((Attaque) b).isUsed()==false))
+			if(b instanceof Attaque)
 			{
-				valeurAttaque = b.getAtt();
-				((Attaque) b).setUsed(true);
+				if(((Attaque) b).isUsed()==false)
+
+				{
+					valeurAttaque += b.getAtt();
+					((Attaque) b).setUsed(true);
+				}
+				else {System.out.println("Condition attaqueAvecTousBatiments");}
 			}
 		}
 		System.out.println("La valeur total de votre attaque est de " + valeurAttaque + "points");
@@ -611,7 +589,7 @@ public class Joueur extends Compte{
 	
 	private double attaqueAvecUnBatiment(List<Integer> listeLigne) {
 		double valeurAttaque = 0;
-		int choix = saisieInt("Avec quel batiment voulez-vous attaquer? (n� du batiment)");
+		int choix = saisieInt("Avec quel batiment voulez-vous attaquer? (numero du batiment)");
 		int ligneBatiment = listeLigne.get(choix-1);
 		int cpt = 0;
 		
@@ -632,6 +610,7 @@ public class Joueur extends Compte{
 				}
 				
 			}
+			cpt++;
 		}
 		
 		return valeurAttaque;
@@ -655,7 +634,7 @@ public class Joueur extends Compte{
 	
 	public void displayOwnedConstruction(){
 		
-		System.out.printf("%s","Liste de vos batiments" + "\n"); // TODO: "de vos batiment" mais la fonction est appel�e aussi pour afficher les batiments de l'ennemi dans la fonction menuAttaqueChoixBatiment
+		System.out.printf("%s","Liste des batiments de "+ this.getSurnom() + "\n"); // TODO: "de vos batiment" mais la fonction est appel�e aussi pour afficher les batiments de l'ennemi dans la fonction menuAttaqueChoixBatiment
 		//System.out.printf("%25s %5s %5s %5s\n", "Nom", "level", "def", "att");
 		
 		for(Batiment batiment : this.construction){
@@ -716,7 +695,6 @@ public class Joueur extends Compte{
 
 		if(this.getBatimentAttaque())
 		{
-			
 			for (Joueur j: p.getJoueurs())
 			{
 				if (j.surnom!=this.surnom)
@@ -726,22 +704,21 @@ public class Joueur extends Compte{
 			}
 		
 			System.out.printf("%s","MENU ATTAQUER" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
-			System.out.printf("%s","0- Menu precedent");
+			System.out.printf("%s","0- Menu precedent \n");
 			System.out.printf("%s","1- Attaquer!!!!!" + "\n");
 			int choix = saisieInt("Choisir une option");
 		
 			switch(choix) 
 			{
 				case 0: menuJoueur(p) ;break;
-				case 1: double valeurAttaque = choixBatimentAttaque();menuAttaqueJoueur(p,valeurAttaque);menuAttaquer(p);break;
-				default : System.out.println("Mauvaise valeur");menuAttaquer(p);
+				case 1: double valeurAttaque = choixBatimentAttaque();menuAttaqueJoueur(p,valeurAttaque);break;
+				default : System.out.println("Mauvaise valeur");
 			}
 			
 		}
 		else
 		{
-			System.out.println("Vous n'avez pas de b�timent d'attaque disponible pour attaquer, quel dommage...'");
-
+			System.out.println("Vous n'avez pas de batiment d'attaque disponible pour attaquer, quel dommage...'");
 			menuJoueur(p);
 		}
 	}
@@ -749,12 +726,19 @@ public class Joueur extends Compte{
 	
 	public void menuAttaqueJoueur(Partie p, double valeurAttaque)
 	{
+		System.out.println("liste des joueurs adverses :");
+		for (Joueur j: p.getJoueurs())
+		{
+			if (j.surnom!=this.surnom)
+			{
+				System.out.println((p.getJoueurs().indexOf(j)+1)+ " - "+j.getSurnom());
+			}
+		}
 		int joueur = saisieInt("Quel joueur souhaites-tu attaquer? (1,2,3,...)");
 		Joueur ennemi = p.getJoueurs().get(joueur-1);
 				
 		System.out.printf("%s\n","MENU ATTAQUER" + " - " + this.prenom + " " + this.nom + " " + this.surnom);
 
-		//System.out.printf("%s\n","0- Menu pr�c�dent"); // ne peut pas revenir en arri�re car batiment attaque choisit et les boolean sont chang�s en used==true
 		System.out.printf("%s\n","1- Attaquer tous les  batiments?");
 		System.out.printf("%s\n","2- Attaquer un  seul batiment?");
 
@@ -762,7 +746,7 @@ public class Joueur extends Compte{
 		
 		switch(choix) 
 		{
-			//case 0: menuAttaquer(p); ;break;
+			
 			case 1: attaqueJoueur(ennemi,p,valeurAttaque);break;
 			case 2: menuAttaqueChoixBatiment(ennemi,p,valeurAttaque);break;
 			default : System.out.println("Mauvaise valeur");
@@ -776,14 +760,15 @@ public class Joueur extends Compte{
 		e.displayOwnedConstruction();
 
 		String nomBat = saisieString("Quel batiment voulez vous attaquer(nom)?");
-		int numBat = saisieInt("Le combienti�me de "+ nomBat +"voulez vous attaquer?");
+		int numBat = saisieInt("Le/La combientieme de "+ nomBat +" voulez vous attaquer?");
 		int i=0;
 		Boolean batExiste;
 		Batiment bat;
 		
 		for (Batiment b : e.construction)
 		{
-			if (b.nom.equals(nomBat)){
+			if (b.toStringName().equalsIgnoreCase(nomBat))
+			{
 				i++;
 				batExiste = true;
 				if(i==numBat)
@@ -795,18 +780,15 @@ public class Joueur extends Compte{
 		
 		if(batExiste = false)
 		{
-
-			System.out.println("Le joueur attaqu� ne poss�de pas ce batiment!'");
+			System.out.println("Le joueur attaque ne possede pas ce batiment!'");
 			menuAttaqueChoixBatiment(e,p,valeurAttaque);
 		}
 		if (i!=numBat)
 		{
-			System.out.println("Le num�ro de batiment n'existe pas!'");
+			System.out.println("Le numero de batiment n'existe pas!'");
 			menuAttaqueChoixBatiment(e,p,valeurAttaque);
 		}
-		 
 		menuAttaquer(p);
-
 	}
 	
 	public void attaqueJoueur(Joueur e, Partie p, double valeurAttaque)
@@ -837,7 +819,6 @@ public class Joueur extends Compte{
 		System.out.printf("%s","FIN DE TOUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
 		System.out.printf("%s","Vous avez effectue votre action de jeu, au prochain joueur de jouer !");
 		
-		// TO DO : Mettre le boolean des batiments d'attaque � false
 		for(Batiment batiment : this.construction){
 			if(batiment instanceof Attaque)
 			{

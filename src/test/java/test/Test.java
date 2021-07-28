@@ -62,9 +62,9 @@ public class Test {
 	}
 	
 	public static void seConnecter() {
-		String compteCree = saisieString("\nAvez-vous d�j� cr�� un compte ? (y/n)");
+		String compteCree = saisieString("\nAvez-vous deja cree un compte ? (y/n)");
 		
-		if(compteCree.equals("y"))
+		if(compteCree.equalsIgnoreCase("y"))
 		{
 			String login = saisieString("\nSaisir login");
 			String password = saisieString("Saisir password");
@@ -129,7 +129,7 @@ public class Test {
 	
 	public static void menuJoueur() {
 		System.out.println("\nMenu Joueur");
-		System.out.println("1- D�marrer une nouvelle partie");
+		System.out.println("1- Demarrer une nouvelle partie");
 		System.out.println("2- Reprendre une partie existante");
 		System.out.println("3- Se deconnecter");
 		int choix = saisieInt("Choisir un menu");
@@ -162,9 +162,9 @@ public class Test {
 	
 	public static void menuPartie(Partie p)
 	{
-		System.out.println("\nVous avez d�marr� une nouvelle partie de 'Notre Projet' ! ");
-		System.out.println("Etes-vous pr�t � vous entretuer ?");
-		System.out.println("1- Oui je vais tous vous d�monter !! ");
+		System.out.println("\nVous avez demarre une nouvelle partie de 'Notre Projet' ! ");
+		System.out.println("Etes-vous pret a vous entretuer ?");
+		System.out.println("1- Oui je vais tous vous demonter !! ");
 		System.out.println("2- Laisse-moi quelques minutes stp");
 		System.out.println("3- Se deconnecter");
 		int choix = saisieInt("Choisir un menu");
