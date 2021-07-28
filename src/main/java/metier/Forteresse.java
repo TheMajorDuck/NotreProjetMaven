@@ -24,9 +24,9 @@ public class Forteresse extends Defense {
 		super(nom, level, def);
 	}
 	
-	public Forteresse(int idCompte, int idPartie,String nom, int level, double def)
+	public Forteresse(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 		

@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+
+import com.mysql.jdbc.Statement;
+
 import java.util.ArrayList;
 import metier.*;
 
@@ -112,10 +115,11 @@ public class DAOCompte implements IDAO<Compte,Integer>{
 
 	@Override
 	public Compte insert(Compte c) {
+		Compte compte = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO compte (login, password, type_compte, prenom, nom, surnom) VALUES (?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO compte (login, password, type_compte, prenom, nom, surnom) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, c.getLogin());
 			ps.setString(2, c.getPassword());
@@ -125,11 +129,21 @@ public class DAOCompte implements IDAO<Compte,Integer>{
 			ps.setString(6, c.getSurnom());
 			ps.executeUpdate();
 
+			ResultSet generatedKeys = ps.getGeneratedKeys();
+			
+			while(generatedKeys.next())
+			{
+				compte = new Joueur(generatedKeys.getInt(1),c.getLogin(),c.getPassword(),c.getPrenom(),c.getNom(),c.getSurnom());
+			}
+			
+			generatedKeys.close();
+			
 			ps.close();
 			conn.close();
+	
 		}
 		catch(Exception e) {e.printStackTrace();}
-		return c;
+		return compte;
 
 	}
 

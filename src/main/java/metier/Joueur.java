@@ -26,6 +26,7 @@ public class Joueur extends Compte{
 	
 	static DAOBatiment daoBatiment = new DAOBatiment();
 	static DAOPartie daoPartie = new DAOPartie();
+	static DAORessource daoRessource = new DAORessource();
 
 	public static int saisieInt(String msg) 
 		{
@@ -383,6 +384,7 @@ public class Joueur extends Compte{
 					}
 					
 					batiment.upgrade();
+					daoBatiment.update(batiment);
 					
 					setConstruction(this.actuDef());
 					setConstruction(this.actuAtt());
@@ -776,6 +778,7 @@ public class Joueur extends Compte{
 				if(i==numBat)
 				{
 					attaque(e, b, valeurAttaque);
+					daoBatiment.update(b);
 				}
 			}
 		}
@@ -806,10 +809,12 @@ public class Joueur extends Compte{
 			if(i<=degatReste) 
 			{
 				attaque(e, b, degatBatiment+1);
+				daoBatiment.update(b);
 			}
 			else 
 			{
 				attaque(e, b, degatBatiment);
+				daoBatiment.update(b);
 			}
 		}
 		menuAttaquer(p);
@@ -817,6 +822,11 @@ public class Joueur extends Compte{
 		
 	public void menuFinDeTour(Partie p)
 	{
+		for(Ressource r : this.stock)
+		{
+			daoRessource.updateRessource(this.getId(), p.getId(), r);
+		}
+		
 		this.setTourEnCours(false);
 		System.out.printf("%s","FIN DE TOUR" + " - " + this.prenom + " " + this.nom + " " + this.surnom + "\n");
 		System.out.printf("%s","Vous avez effectue votre action de jeu, au prochain joueur de jouer !");

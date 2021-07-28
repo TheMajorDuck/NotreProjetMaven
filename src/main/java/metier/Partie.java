@@ -18,6 +18,7 @@ public class Partie {
 	static DAOCompte daoCompte = new DAOCompte();
 	static DAOPartie daoPartie = new DAOPartie();
 	static DAOBatiment daoBatiment = new DAOBatiment();
+	static DAORessource daoRessource = new DAORessource();
 	static int cptPartie=0;
 
 	private int id;
@@ -28,6 +29,11 @@ public class Partie {
 	public Partie(int id, int nbrDeTour)
 	{
 		this.id = id;
+		this.nbrDeTour = nbrDeTour;
+	}
+	
+	public Partie()
+	{
 		this.nbrDeTour = nbrDeTour;
 	}
 	
@@ -80,6 +86,17 @@ public class Partie {
 				System.out.println("\nBienvenue "+connected.getPrenom()+" "+connected.getNom()+", vous êtes le Joueur 1, quelle chance ! ");
 				System.out.println("\nDans cette partie vous serez "+connected.getSurnom());
 				joueurs.add((Joueur)connected);
+				
+				for(Ressource r : ((Joueur) connected).getStock())
+				{
+					daoRessource.ajoutRessource(connected.getId(), p.getId(), r);
+				}
+				
+				for(Batiment b : ((Joueur) connected).getConstruction())
+				{
+					daoBatiment.ajoutBatiment(connected.getId(), p.getId(), b);
+				}
+				
 			}	
 			else
 			{
@@ -95,6 +112,16 @@ public class Partie {
 					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)j);
+					
+					for(Ressource r : ((Joueur) j).getStock())
+					{
+						daoRessource.ajoutRessource(j.getId(), p.getId(), r);
+					}
+					
+					for(Batiment b : ((Joueur) j).getConstruction())
+					{
+						daoBatiment.ajoutBatiment(j.getId(), p.getId(), b);
+					}
 				}
 				else
 				{
@@ -106,11 +133,22 @@ public class Partie {
 					Joueur j = new Joueur(login, password, prenom, nom, surnom);
 					
 					Compte joueur = daoCompte.insert(j);
+					System.out.println(joueur.toString());
 					daoCompte.ajoutJoueur(p.getId(),joueur.getId());
-					
+										
 					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)j);
+					
+					for(Ressource r : ((Joueur) joueur).getStock())
+					{
+						daoRessource.ajoutRessource(joueur.getId(), p.getId(), r);
+					}
+					
+					for(Batiment b : ((Joueur) joueur).getConstruction())
+					{
+						daoBatiment.ajoutBatiment(joueur.getId(), p.getId(), b);
+					}
 				}
 				
 			}

@@ -25,9 +25,9 @@ public class Four  extends Transformation {
 		super(nom, level, def);
 	}
 
-	public Four(int idCompte, int idPartie,String nom, int level, double def)
+	public Four(int id,int idCompte, int idPartie,String nom, int level, double def)
 	{
-		super(idCompte, idPartie,nom, level, def);
+		super(id,idCompte, idPartie,nom, level, def);
 	}
 	
 	@Override

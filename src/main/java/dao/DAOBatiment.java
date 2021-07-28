@@ -52,16 +52,16 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 				
 				switch(nomBatiment)
 				{
-					case "bastide" : b = new Bastide(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "carriere" : b = new Carriere(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "catapulte" : b = new Catapulte(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "fonderie" : b = new Fonderie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "forteresse" : b = new Forteresse(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "four" : b = new Four(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "merveille" : b = new Merveille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "mine" : b = new Mine(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "muraille" : b = new Muraille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "scierie" : b = new Scierie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Bastide" : b = new Bastide(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Carriere" : b = new Carriere(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Catapulte" : b = new Catapulte(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Fonderie" : b = new Fonderie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Forteresse" : b = new Forteresse(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Four" : b = new Four(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Merveille" : b = new Merveille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Mine" : b = new Mine(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Muraille" : b = new Muraille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Scierie" : b = new Scierie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
 					default : System.out.println("Ceci n'est pas un batiment");
 				}
 				
@@ -99,16 +99,16 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 				
 				switch(nomBatiment)
 				{
-					case "bastide" : b = new Bastide(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "carriere" : b = new Carriere(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "catapulte" : b = new Catapulte(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "fonderie" : b = new Fonderie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "forteresse" : b = new Forteresse(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "four" : b = new Four(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "merveille" : b = new Merveille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "mine" : b = new Mine(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "muraille" : b = new Muraille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
-					case "scierie" : b = new Scierie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Bastide" : b = new Bastide(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Carriere" : b = new Carriere(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Catapulte" : b = new Catapulte(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Fonderie" : b = new Fonderie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Forteresse" : b = new Forteresse(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Four" : b = new Four(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Merveille" : b = new Merveille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Mine" : b = new Mine(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Muraille" : b = new Muraille(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
+					case "Scierie" : b = new Scierie(rs.getString("nom"), rs.getInt("niveau"), rs.getInt("pts_de_defense"));break;
 					default : System.out.println("Ceci n'est pas un batiment");
 				}
 				
@@ -140,7 +140,9 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 			ps.setDouble(5,b.getDef());
 			
 			ps.executeUpdate();
-
+			
+			
+			
 			ps.close();
 			conn.close();
 		} 
@@ -151,6 +153,7 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 	}
 	
 	public Batiment ajoutBatiment(int idCompte, int idPartie, Batiment b) {
+		Batiment batiment = null;
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -163,6 +166,31 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 			ps.setDouble(5,b.getDef());
 			
 			ps.executeUpdate();
+			
+			ResultSet generatedKeys = ps.getGeneratedKeys();
+			
+			while(generatedKeys.next())
+			{
+				String nomBatiment = b.toStringName();
+				
+				switch(nomBatiment)
+				{
+					case "Bastide" : batiment = new Bastide(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Carriere" : batiment = new Carriere(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Catapulte" : batiment = new Catapulte(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Fonderie" : batiment = new Fonderie(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Forteresse" : batiment = new Forteresse(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Four" : batiment = new Four(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Merveille" : batiment = new Merveille(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Mine" : batiment = new Mine(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Muraille" : batiment = new Muraille(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					case "Scierie" : batiment = new Scierie(generatedKeys.getInt(1),idCompte,idPartie,b.getNom(),b.getLevel(),b.getDef());break;
+					default : System.out.println("Ceci n'est pas un batiment");
+				}
+				
+			}
+			
+			generatedKeys.close();
 
 			ps.close();
 			conn.close();
@@ -170,31 +198,39 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return b;
+		return batiment;
 	}
 
 	@Override
 	public Batiment update(Batiment b) {
+		if(b.getDef()>0)
+		{
 		try {
-
+			
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("UPDATE batiment SET nom=?, niveau=?, pts_de_defense=?) WHERE id_compte=? AND id_partie=?");
-			ps.setString(1,b.getNom());
+			PreparedStatement ps = conn.prepareStatement("UPDATE batiment SET nom=?, niveau=?, pts_de_defense=? WHERE id=?");
+			ps.setString(1,b.toStringName());
 			ps.setInt(2,b.getLevel());
 			ps.setDouble(3,b.getDef());
-			ps.setInt(4,b.getIdCompte());
-			ps.setInt(5,b.getIdPartie());
+			ps.setInt(4,b.getId());
 			
 			ps.executeUpdate();
-
+			
 			ps.close();
 			conn.close();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		}
+		else
+		{
+			deleteBatiment(b);
+		}
+		
 		return b;
+		
 	}
 	
 	@Override
@@ -207,10 +243,9 @@ public class DAOBatiment implements IDAO<Batiment,Integer>{
 	try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlBDD,loginBDD,passwordBDD);
-			PreparedStatement ps = conn.prepareStatement("DELETE FROM batiment WHERE id_partie=? and id_compte=?");
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM batiment WHERE id=?");
 
-			ps.setInt(1, b.getIdPartie());
-			ps.setInt(2, b.getIdCompte());
+			ps.setInt(1, b.getId());
 			ps.executeUpdate();
 
 			ps.close();
