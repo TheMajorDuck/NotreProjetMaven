@@ -3,7 +3,11 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Cuivre extends Ressource{
+	public Cuivre() {}
 
 	public Cuivre(int stock) {
 		super(stock);

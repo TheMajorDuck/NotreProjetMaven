@@ -3,8 +3,13 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Fer extends Ressource{
 
+	public Fer() {
+	}
 	public Fer(int stock) {
 		super(stock);
 		// TODO Auto-generated constructor stub
