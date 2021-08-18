@@ -3,6 +3,7 @@ package daoJDBC;
 import java.util.List;
 
 import dao.IDAO;
+import dao.IDAOBatiment;
 
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 
 import metier.*;
 
-public class DAOBatiment implements IDAO<Batiment,Integer>{
+public class DAOBatiment implements IDAOBatiment{
 
 	@Override
 	public Batiment findById(Integer id) {

@@ -3,6 +3,9 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Fonderie  extends Transformation {
 	protected Bois b = new Bois(0);
 	protected Pierre p = new Pierre(3);

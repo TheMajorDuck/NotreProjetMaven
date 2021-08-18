@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import javax.persistence.ManyToMany;
+
 import dao.*;
 import daoJDBC.DAOBatiment;
 import daoJDBC.DAOPartie;
@@ -20,6 +23,7 @@ public class Joueur extends Compte{
 	private Gold g = new Gold(0);
 	private Fer f = new Fer(0);
 	private Cuivre cu = new Cuivre(0);
+	@ManyToMany
 	protected List<Ressource> stock = new ArrayList <Ressource>();
 	
 	protected List<Batiment> construction = new ArrayList <Batiment>();
@@ -48,6 +52,12 @@ public class Joueur extends Compte{
 		return sc.nextLine();
 	}
 	
+	
+	
+	public Joueur() {
+		super();
+	}
+
 	public Joueur (int id, String login, String password, String prenom, String nom, String surnom)
 	{
 		super(id,login,password, TypeCompte.Joueur,prenom, nom, surnom);

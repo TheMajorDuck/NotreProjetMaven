@@ -3,6 +3,9 @@ package metier;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Scierie extends Production{
 	protected Bois b = new Bois(0);
 	protected Pierre p = new Pierre(3);

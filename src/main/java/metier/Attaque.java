@@ -1,5 +1,8 @@
 package metier;
 
+import javax.persistence.Entity;
+
+@Entity
 public abstract class Attaque extends Batiment{
 
 	protected boolean used = false;
