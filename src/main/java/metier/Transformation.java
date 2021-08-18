@@ -3,6 +3,9 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public abstract class Transformation extends Batiment{
 	protected Bois b = new Bois(0);
 	protected Pierre p = new Pierre(0);

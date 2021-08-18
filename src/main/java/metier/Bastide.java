@@ -1,5 +1,8 @@
 package metier;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Bastide extends Defense {
 	
 	public Bastide(){

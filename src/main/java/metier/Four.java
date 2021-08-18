@@ -2,6 +2,9 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Four  extends Transformation {
 	
 	protected Bois b = new Bois(3);

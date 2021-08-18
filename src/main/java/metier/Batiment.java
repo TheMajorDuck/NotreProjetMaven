@@ -3,6 +3,17 @@ package metier;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Batiment")
 public abstract class Batiment {
 
 	protected String nom;
@@ -12,6 +23,8 @@ public abstract class Batiment {
 	protected int level=1;
 	protected int idCompte;
 	protected int idPartie;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected int id;
 	
 	protected Bois b = new Bois(0);
@@ -21,8 +34,7 @@ public abstract class Batiment {
 	protected Gold g = new Gold(0);
 	protected Fer f = new Fer(0);
 	protected Cuivre cu = new Cuivre(0);
-	
-	
+		
 	public Batiment() {
 		//cost.add(b);cost.add(p);cost.add(m);cost.add(c);cost.add(g);cost.add(f);cost.add(cu);
 	}
