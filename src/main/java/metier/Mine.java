@@ -3,6 +3,9 @@ package metier;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Mine  extends Production {
 	protected Bois b = new Bois(3);
 	protected Pierre p = new Pierre(3);

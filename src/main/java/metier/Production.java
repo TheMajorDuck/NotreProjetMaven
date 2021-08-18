@@ -1,5 +1,8 @@
 package metier;
 
+import javax.persistence.Entity;
+
+@Entity
 public abstract class Production extends Batiment {
 	
 	protected Bois b = new Bois(0);
