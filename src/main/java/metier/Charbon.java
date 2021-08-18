@@ -3,8 +3,15 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Charbon extends Ressource{
 
+	
+	public Charbon() {
+	}
+	
 	public Charbon(int stock) {
 		super(stock);
 		// TODO Auto-generated constructor stub
