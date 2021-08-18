@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import dao.*;
+import daoJDBC.DAOBatiment;
+import daoJDBC.DAOCompte;
+import daoJDBC.DAOPartie;
+import daoJDBC.DAORessource;
 
 public class Partie {
 

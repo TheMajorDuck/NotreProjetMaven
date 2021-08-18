@@ -1,4 +1,4 @@
-package dao;
+package daoJDBC;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 import com.mysql.jdbc.Statement;
+
+import dao.IDAO;
 
 import java.util.ArrayList;
 import java.sql.Connection;

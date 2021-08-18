@@ -1,4 +1,4 @@
-package dao;
+package daoJDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import com.mysql.jdbc.Statement;
+
+import dao.IDAO;
 
 import java.util.ArrayList;
 import metier.*;

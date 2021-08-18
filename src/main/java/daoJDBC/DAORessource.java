@@ -1,4 +1,4 @@
-package dao;
+package daoJDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.IDAO;
 import metier.Bastide;
 import metier.Batiment;
 import metier.Bois;

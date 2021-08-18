@@ -1,6 +1,9 @@
-package dao;
+package daoJDBC;
 
 import java.util.List;
+
+import dao.IDAO;
+
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;

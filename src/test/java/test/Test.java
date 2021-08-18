@@ -2,9 +2,9 @@ package test;
 
 import java.util.Scanner;
 
-import dao.DAOBatiment;
-import dao.DAOCompte;
-import dao.DAOPartie;
+import daoJDBC.DAOBatiment;
+import daoJDBC.DAOCompte;
+import daoJDBC.DAOPartie;
 import metier.Admin;
 import metier.Compte;
 import metier.Joueur;

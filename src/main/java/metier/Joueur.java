@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
 import dao.*;
+import daoJDBC.DAOBatiment;
+import daoJDBC.DAOPartie;
+import daoJDBC.DAORessource;
 import metier.*;
 
 
