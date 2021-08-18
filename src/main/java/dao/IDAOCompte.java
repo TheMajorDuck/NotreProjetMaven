@@ -1,5 +1,7 @@
 package dao;
 
-public interface IDAOCompte extends IDAO {
+import metier.Compte;
+
+public interface IDAOCompte extends IDAO<Compte, Integer> {
 
 }

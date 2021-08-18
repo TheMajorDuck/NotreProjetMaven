@@ -52,6 +52,12 @@ public class Joueur extends Compte{
 		return sc.nextLine();
 	}
 	
+	
+	
+	public Joueur() {
+		super();
+	}
+
 	public Joueur (int id, String login, String password, String prenom, String nom, String surnom)
 	{
 		super(id,login,password, TypeCompte.Joueur,prenom, nom, surnom);

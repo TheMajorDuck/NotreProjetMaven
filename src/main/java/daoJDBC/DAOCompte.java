@@ -4,17 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.Statement;
+import dao.IDAOCompte;
+import metier.Admin;
+import metier.Compte;
+import metier.Joueur;
 
-import dao.IDAO;
-
-import java.util.ArrayList;
-import metier.*;
-
-public class DAOCompte implements IDAO<Compte,Integer>{
-
+public class DAOCompte implements IDAOCompte{
+//JDBC
 	@Override
 	public Compte findById(Integer id) {
 		Compte c=null;
