@@ -3,11 +3,17 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Gold extends Ressource{
 
 	public Gold(int stock) {
 		super(stock);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Gold() {
 	}
 
 	@Override

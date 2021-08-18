@@ -22,32 +22,51 @@ public class DAORessource implements IDAORessource {
 
 	@Override
 	public List<Ressource> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		List<Ressource> ressources = em.createQuery("from Ressource",Ressource.class).getResultList();
+		em.close();
+		return ressources;
 	}
 
 	@Override
-	public Ressource insert(Ressource o) {
-		// TODO Auto-generated method stub
-		return null;
+	public Ressource insert(Ressource r) {
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+
+		em.getTransaction().begin();
+		em.persist(r);
+		em.getTransaction().commit();
+		em.close();
+		return r;
 	}
 
 	@Override
 	public Ressource update(Ressource o) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		em.getTransaction().begin();
+		o=em.merge(o);
+		em.getTransaction().commit();
+		em.close();
+		return o;
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		Ressource r = em.find(Ressource.class,id);
+		em.getTransaction().begin();
+		em.remove(r);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
 	public List<Ressource> findAllByIdCompteIdPartie(Integer idCompte, Integer idPartie) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		EntityManager em = Context.getInstance().getEmf().createEntityManager();
+		List<Ressource> ressources = em.createNativeQuery("SELECT * FROM ressource WHERE id_compte= :idCompte AND id_partie= : idPartie", Ressource.class).getResultList();
+		
+		em.close();
+		return ressources;
 	}
 	
 	
