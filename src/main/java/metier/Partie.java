@@ -11,24 +11,36 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import dao.*;
 import daoJDBC.DAOBatiment;
 import daoJDBC.DAOCompte;
 import daoJDBC.DAOPartie;
 import daoJDBC.DAORessource;
 
+@Entity
 public class Partie {
-
+	
+	
 	static DAOCompte daoCompte = new DAOCompte();
 	static DAOPartie daoPartie = new DAOPartie();
 	static DAOBatiment daoBatiment = new DAOBatiment();
 	static DAORessource daoRessource = new DAORessource();
 	static int cptPartie=0;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int nbrDeTour=100;
+	private int nbrDeTour = 100;
 	private boolean partieEnCours;
-	private List<Joueur> joueurs= new ArrayList<Joueur>();
+	
+	private transient List<Joueur> joueurs= new ArrayList<Joueur>();
 	
 	public Partie(int id, int nbrDeTour)
 	{
@@ -87,7 +99,7 @@ public class Partie {
 			if(i == 0)
 			{
 				System.out.println("\nJoueur 1 : ");
-				System.out.println("\nBienvenue "+connected.getPrenom()+" "+connected.getNom()+", vous êtes le Joueur 1, quelle chance ! ");
+				System.out.println("\nBienvenue "+connected.getPrenom()+" "+connected.getNom()+", vous ï¿½tes le Joueur 1, quelle chance ! ");
 				System.out.println("\nDans cette partie vous serez "+connected.getSurnom());
 				joueurs.add((Joueur)connected);
 				
@@ -108,7 +120,7 @@ public class Partie {
 			else
 			{
 				System.out.println("\nJoueur "+(i+1)+" : ");
-				String compteCree = saisieString("Ce joueur a-t-il déjà un compte ? (y/n)");
+				String compteCree = saisieString("Ce joueur a-t-il dï¿½jï¿½ un compte ? (y/n)");
 				
 				if(compteCree.equalsIgnoreCase("y"))
 				{
@@ -116,7 +128,7 @@ public class Partie {
 					Compte j = daoCompte.findBySurnom(surnomJ);
 					daoCompte.ajoutJoueur(p.getId(),j.getId());
 					
-					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
+					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous ï¿½tes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)j);
 					
@@ -138,13 +150,13 @@ public class Partie {
 					String password = saisieString("\nSaisissez votre mot de passe : ");
 					String prenom = saisieString("\nVeuillez indiquez votre prenom : ");
 					String nom = saisieString("\nVeuillez indiquez votre nom : ");
-					String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez être reconnu durant la partie : ");
+					String surnom = saisieString("\nChoisissez le nom sous lequel vous souhaitez ï¿½tre reconnu durant la partie : ");
 					Joueur j = new Joueur(login, password, prenom, nom, surnom);
 					
 					Compte joueur = daoCompte.insert(j);
 					daoCompte.ajoutJoueur(p.getId(),joueur.getId());
 										
-					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous êtes le Joueur "+(i+1)+" ! ");
+					System.out.println("\nBienvenue "+j.getPrenom()+" "+j.getNom()+", vous ï¿½tes le Joueur "+(i+1)+" ! ");
 					System.out.println("\nDans cette partie vous serez "+j.getSurnom());
 					joueurs.add((Joueur)joueur);
 					
